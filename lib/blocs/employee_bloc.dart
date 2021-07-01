@@ -189,6 +189,20 @@ class EmployeeBloc extends BlocBase {
     return preference.get('users') != null;
   }
 
+  Future<void> updateEmployee({EmployeeBloc employeeBloc, EmployeeModel employeeModel}) async {
+    _streamController.add(true);
+    userLocal = await loggedUserAsync();
+    Map<String, dynamic> userData = {
+      "name": employeeModel.name
+    };
+    _fireStore
+        .collection('users')
+        .doc(userLocal.id).update(userData);
+    CustomToast.success('Úsuario terá dados atualizados após proxima recarga.');
+    print(employeeModel.toString());
+    _streamController.add(false);
+  }
+
   @override
   void dispose() {
     _user$.close();
