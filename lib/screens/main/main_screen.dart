@@ -5,6 +5,7 @@ import 'package:share_it/app_module.dart';
 import 'package:share_it/blocs/employee_bloc.dart';
 import 'package:share_it/components/custom_icon_button.dart';
 import 'package:share_it/components/custom_rounded_button.dart';
+import 'package:share_it/screens/home/home_module.dart';
 import 'package:share_it/screens/profile/profile_module.dart';
 
 class MainScreen extends StatefulWidget {
@@ -48,17 +49,12 @@ class _MainScreenState extends State<MainScreen> {
             controller: _pageController,
             onPageChanged: onPageChanged,
             children: <Widget>[
-              Container(
-                color: Colors.yellow,
-              ),
+              HomeModule(),
               Container(
                 color: Colors.redAccent,
               ),
               Container(
                 color: Colors.white,
-              ),
-              Container(
-                color: Colors.yellow,
               ),
               ProfileModule(),
             ]),
@@ -69,7 +65,7 @@ class _MainScreenState extends State<MainScreen> {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                SizedBox(width: 0.8,),
+                SizedBox(width: 0.3,),
                 CustomIconButton(
                   icon: FaIcon(
                     FontAwesomeIcons.home,
@@ -96,10 +92,22 @@ class _MainScreenState extends State<MainScreen> {
                   text: 'chamados',
                   color: _page == 1 ? Theme.of(context).accentColor : Colors.black,
                 ),
-                SizedBox(width: 30),
                 CustomIconButton(
                   icon: FaIcon(
                     FontAwesomeIcons.newspaper,
+                    size: 20,
+                    color:
+                    _page == 2 ? Theme.of(context).accentColor : Colors.black,
+                  ),
+                  onTap: () {
+                    _pageController.jumpToPage(2);
+                  },
+                  text: 'news',
+                  color: _page == 2 ? Theme.of(context).accentColor : Colors.black,
+                ),
+                CustomIconButton(
+                  icon: FaIcon(
+                    FontAwesomeIcons.userCog,
                     size: 20,
                     color:
                     _page == 3 ? Theme.of(context).accentColor : Colors.black,
@@ -107,42 +115,14 @@ class _MainScreenState extends State<MainScreen> {
                   onTap: () {
                     _pageController.jumpToPage(3);
                   },
-                  text: 'news',
+                  text: 'perfil',
                   color: _page == 3 ? Theme.of(context).accentColor : Colors.black,
                 ),
-                CustomIconButton(
-                  icon: FaIcon(
-                    FontAwesomeIcons.userCog,
-                    size: 20,
-                    color:
-                    _page == 4 ? Theme.of(context).accentColor : Colors.black,
-                  ),
-                  onTap: () {
-                    _pageController.jumpToPage(4);
-                  },
-                  text: 'perfil',
-                  color: _page == 4 ? Theme.of(context).accentColor : Colors.black,
-                ),
-                SizedBox(width: 0.8),
+                SizedBox(width: 0.3),
               ],
             ),
           ),
         ),
-      floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: Padding(
-          padding: const EdgeInsets.only(top: 24.0, bottom: 5),
-          child:  CustomRoundedButton(
-            icon: FaIcon(
-                FontAwesomeIcons.bookOpen,
-              size: 20,
-              color: _page == 2 ? Theme.of(context).accentColor : Colors.black,
-            ),
-            onPressed: () => _pageController.jumpToPage(2),
-            color: Colors.white,
-            radius: 30,
-          ),
-        )
     );
   }
 }
