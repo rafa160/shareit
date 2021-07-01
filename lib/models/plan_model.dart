@@ -30,11 +30,13 @@ class PlanModel {
     id = json['id'];
     name = json['name'];
     index = json['index'];
+    value = json['value'];
   }
 
   Map<String, dynamic> toMap() => {
     'id': id,
     'name': name,
     'index': index,
+    'value': value
   };
 }

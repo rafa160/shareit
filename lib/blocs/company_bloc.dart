@@ -35,6 +35,16 @@ class CompanyBloc extends BlocBase {
 
   }
 
+  Future<CompanyModel> getCompanyById(String id) async {
+    try {
+      final DocumentSnapshot documentSnapshot =
+      await _fireStore.collection('companies').doc(id).get();
+      CompanyModel companyModel = CompanyModel.fromDocument(documentSnapshot);
+      return companyModel;
+    } catch (e){
+      CustomToast.fail('error');
+    }
+  }
 }
 
 
