@@ -6,14 +6,14 @@ import 'package:share_it/app_module.dart';
 import 'package:share_it/blocs/employee_bloc.dart';
 import 'package:share_it/components/app_theme.dart';
 import 'package:share_it/components/custom_button.dart';
-import 'package:share_it/components/custom_circular_progress_indicator.dart';
 import 'package:share_it/components/custom_color_circular_progress_indicator.dart';
+import 'package:share_it/components/custom_list_tile.dart';
 import 'package:share_it/components/custom_logout_bottom_sheet.dart';
 import 'package:share_it/components/profile_header.dart';
 import 'package:share_it/components/style.dart';
 import 'package:share_it/models/employee_model.dart';
 import 'package:share_it/screens/login/login_module.dart';
-import 'package:share_it/screens/profile/profile_module.dart';
+import 'package:share_it/screens/profile/edit_profile/edit_profile_module.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -76,10 +76,46 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     );
                   }
               ),
+              Divider(
+                color: Theme.of(context).accentColor,
+              ),
               SizedBox(
                 height: 40,
               ),
-
+              CustomListTile(
+                title: 'meus dados',
+                subTitle: 'visualize suas informações',
+                icon: FaIcon(
+                  FontAwesomeIcons.cog
+                ),
+                onTap: (){
+                  Get.to(() => EditProfileModule(employeeBloc.userLocal));
+                },
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 20, right: 20),
+                child: Divider(),
+              ),
+              CustomListTile(
+                title: 'meus contratos',
+                subTitle: 'contratos e pendências de assinatura',
+                icon: FaIcon(
+                    FontAwesomeIcons.file
+                ),
+                onTap: (){},
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 20, right: 20),
+                child: Divider(),
+              ),
+              CustomListTile(
+                title: 'sobre',
+                subTitle: 'sobre aplicativo e versão',
+                icon: FaIcon(
+                    FontAwesomeIcons.info
+                ),
+                onTap: (){},
+              ),
             ],
           ),
         ),
