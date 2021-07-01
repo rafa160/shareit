@@ -6,6 +6,7 @@ import 'package:share_it/app_module.dart';
 import 'package:share_it/blocs/employee_bloc.dart';
 import 'package:share_it/components/custom_button.dart';
 import 'package:share_it/components/custom_circular_progress_indicator.dart';
+import 'package:share_it/components/custom_color_circular_progress_indicator.dart';
 import 'package:share_it/components/custom_form_builder.dart';
 import 'package:share_it/components/style.dart';
 import 'package:share_it/screens/login/login_module.dart';
@@ -97,7 +98,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                   _formKey.currentState.value['email'],
                                   _formKey.currentState.value['password'],
                                   context);
-
                             }
                           },
                         ),
@@ -105,7 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     } else {
                       return CustomButton(
                         onPressed: () {},
-                        widget: CustomCircularProgressIndicator(),
+                        widget: CustomColorCircularProgressIndicator(),
                       );
                     }
                   }

@@ -14,7 +14,7 @@ class ThemeDark {
         color: background,
         brightness: Brightness.dark,
         centerTitle: true,
-        elevation: 8,
+        elevation: 0,
         actionsIconTheme: IconThemeData(color: green),
         iconTheme: IconThemeData(color: green));
   }

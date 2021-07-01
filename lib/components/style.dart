@@ -55,7 +55,7 @@ TextStyle buttonColorBlack = GoogleFonts.nunito(
 );
 
 TextStyle textPlanCard = GoogleFonts.nunito(
-  fontSize: 16,
+  fontSize: 18,
   fontWeight: FontWeight.bold,
 );
 
@@ -67,6 +67,11 @@ TextStyle subtitleProfileHeader = GoogleFonts.nunito(
 TextStyle subTitlePlanCard = GoogleFonts.nunito(
   fontSize: 16,
   color: Colors.green,
+  fontWeight: FontWeight.bold,
+);
+
+TextStyle appBarTitle = GoogleFonts.nunito(
+  fontSize: 20,
   fontWeight: FontWeight.bold,
 );
 
