@@ -11,7 +11,7 @@ class CustomColorCircularProgressIndicator extends StatelessWidget {
           width: 20,
           child: CircularProgressIndicator(
             strokeWidth: 3.0,
-            valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).accentColor),
+            valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
           ),
         ),
       ),
