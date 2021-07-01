@@ -47,6 +47,7 @@ dependencies:
   mailer: ^5.0.0
   google_sign_in: ^5.0.4
   toggle_switch: ^1.2.0
+  package_info: ^2.0.0
 
 dev_dependencies:
   flutter_test:

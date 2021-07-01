@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:share_it/app_module.dart';
 import 'package:share_it/blocs/employee_bloc.dart';
+import 'package:share_it/blocs/version_bloc.dart';
 import 'package:share_it/components/app_theme.dart';
 import 'package:share_it/components/custom_button.dart';
 import 'package:share_it/components/custom_color_circular_progress_indicator.dart';
@@ -13,7 +14,10 @@ import 'package:share_it/components/profile_header.dart';
 import 'package:share_it/components/style.dart';
 import 'package:share_it/models/employee_model.dart';
 import 'package:share_it/screens/login/login_module.dart';
+import 'package:share_it/screens/profile/contract/contract_module.dart';
 import 'package:share_it/screens/profile/edit_profile/edit_profile_module.dart';
+import 'package:share_it/screens/profile/profile_module.dart';
+import 'package:share_it/themes/dark.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -23,6 +27,7 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
 
   var employeeBloc = AppModule.to.getBloc<EmployeeBloc>();
+  var versionBloc = ProfileModule.to.getBloc<VersionBloc>();
 
   void _switchThemeAction(bool isDarkTheme) {
     AppTheme.of(context)
@@ -102,7 +107,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 icon: FaIcon(
                     FontAwesomeIcons.file
                 ),
-                onTap: (){},
+                onTap: (){
+                  Get.to(() => ContractModule(companyId: employeeBloc.userLocal.companyId,));
+                },
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 20, right: 20),
@@ -115,6 +122,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     FontAwesomeIcons.info
                 ),
                 onTap: (){},
+              ),
+              SizedBox(height: 20,),
+              StreamBuilder(
+                stream: versionBloc.streamVersion$,
+                 builder: (context, snapshot) {
+                   return Text(
+                     "versão: ${snapshot.data}", style: subtitleProfileHeader,
+                   );
+                 }
               ),
             ],
           ),
