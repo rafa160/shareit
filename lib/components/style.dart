@@ -75,3 +75,7 @@ TextStyle appBarTitle = GoogleFonts.nunito(
   fontWeight: FontWeight.bold,
 );
 
+TextStyle homeMessage = GoogleFonts.nunito(
+  fontSize: 22,
+  fontWeight: FontWeight.bold,
+);

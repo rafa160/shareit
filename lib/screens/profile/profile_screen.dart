@@ -115,13 +115,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 padding: const EdgeInsets.only(left: 20, right: 20),
                 child: Divider(),
               ),
-              CustomListTile(
-                title: 'sobre',
-                subTitle: 'sobre aplicativo e versão',
-                icon: FaIcon(
-                    FontAwesomeIcons.info
+              InkWell(
+                onTap: () {
+                  showModalBottomSheet(
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                      context: context,
+                      builder: (builder) {
+                        return CustomModalBottomSheet(
+                          title: 'Gostaria de sair?',
+                          actionButtonTitle: 'logout',
+                          onPressed: () async {
+                            await employeeBloc.signOut();
+                            await Get.offAll(() => LoginModule());
+                          },
+                        );
+                      }
+                  );
+                },
+                child: Padding(
+                  padding: EdgeInsets.only(left: 20, right: 20),
+                  child: ListTile(
+                    leading: Icon(FontAwesomeIcons.signOutAlt, color: redColor, size: 20,),
+                    title: Text('sair',style: textPlanCard),
+                  ),
                 ),
-                onTap: (){},
               ),
               SizedBox(height: 20,),
               StreamBuilder(
@@ -133,28 +150,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                  }
               ),
             ],
-          ),
-        ),
-        bottomNavigationBar: Padding(
-          padding: EdgeInsets.only(left: 20, right: 20, top: 20,bottom: 40),
-          child: CustomButton(
-            onPressed: () async {
-              showModalBottomSheet(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                context: context,
-                builder: (builder) {
-                  return CustomModalBottomSheet(
-                    title: 'Gostaria de sair?',
-                    actionButtonTitle: 'logout',
-                    onPressed: () async {
-                      await employeeBloc.signOut();
-                      await Get.offAll(() => LoginModule());
-                    },
-                  );
-                }
-              );
-            },
-            widget: Text('sair', style: buttonColors,),
           ),
         ),
       ),

@@ -4,7 +4,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:share_it/app_module.dart';
 import 'package:share_it/blocs/employee_bloc.dart';
 import 'package:share_it/components/custom_icon_button.dart';
-import 'package:share_it/components/custom_rounded_button.dart';
 import 'package:share_it/screens/home/home_module.dart';
 import 'package:share_it/screens/profile/profile_module.dart';
 
@@ -94,7 +93,7 @@ class _MainScreenState extends State<MainScreen> {
                 ),
                 CustomIconButton(
                   icon: FaIcon(
-                    FontAwesomeIcons.newspaper,
+                    FontAwesomeIcons.sitemap,
                     size: 20,
                     color:
                     _page == 2 ? Theme.of(context).accentColor : Colors.black,
@@ -102,7 +101,7 @@ class _MainScreenState extends State<MainScreen> {
                   onTap: () {
                     _pageController.jumpToPage(2);
                   },
-                  text: 'news',
+                  text: 'info',
                   color: _page == 2 ? Theme.of(context).accentColor : Colors.black,
                 ),
                 CustomIconButton(
