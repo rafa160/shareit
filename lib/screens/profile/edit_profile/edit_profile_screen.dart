@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:share_it/app_module.dart';
 import 'package:share_it/blocs/employee_bloc.dart';
 import 'package:share_it/components/custom_button.dart';
-import 'package:share_it/components/custom_circular_progress_indicator.dart';
 import 'package:share_it/components/custom_color_circular_progress_indicator.dart';
 import 'package:share_it/components/custom_form_builder.dart';
 import 'package:share_it/components/style.dart';
