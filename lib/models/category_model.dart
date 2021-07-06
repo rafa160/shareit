@@ -17,6 +17,12 @@ class CategoryModel {
     name = snapshot.get('name');
   }
 
+  CategoryModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+  }
+
+
   CategoryModel.fromMapping(Map<String, dynamic> map) {
     name = map['name'];
   }
