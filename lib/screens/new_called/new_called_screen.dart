@@ -1,17 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:get/get.dart';
 import 'package:share_it/app_module.dart';
+import 'package:share_it/blocs/called_bloc.dart';
 import 'package:share_it/blocs/category_bloc.dart';
 import 'package:share_it/blocs/employee_bloc.dart';
+import 'package:share_it/components/custom_button.dart';
 import 'package:share_it/components/custom_circular_progress_indicator.dart';
+import 'package:share_it/components/custom_color_circular_progress_indicator.dart';
 import 'package:share_it/components/custom_expansion_tile_card.dart';
 import 'package:share_it/components/custom_form_builder.dart';
 import 'package:share_it/components/custom_form_builder_dropdown.dart';
 import 'package:share_it/components/style.dart';
+import 'package:share_it/models/called_model.dart';
 import 'package:share_it/models/category_model.dart';
 import 'package:share_it/models/company_model.dart';
 import 'package:share_it/models/employee_model.dart';
+import 'package:share_it/screens/main/main_module.dart';
 import 'package:share_it/screens/new_called/new_called_module.dart';
 
 class NewCalledScreen extends StatefulWidget {
@@ -29,6 +35,7 @@ class _NewCalledScreenState extends State<NewCalledScreen> {
   final GlobalKey<FormBuilderState> _formKey = GlobalKey<FormBuilderState>();
   var employeeBloc = AppModule.to.getBloc<EmployeeBloc>();
   var categoryBloc = NewCalledModule.to.getBloc<CategoryBloc>();
+  var calledBloc = NewCalledModule.to.getBloc<CalledBloc>();
   FocusNode _focusNode = FocusNode();
   String category;
 
@@ -38,6 +45,9 @@ class _NewCalledScreenState extends State<NewCalledScreen> {
     categoryBloc.getCategories();
   }
 
+  void requestFocus() {
+    FocusScope.of(context).unfocus();
+  }
 
   @override
   void dispose() {
@@ -87,7 +97,7 @@ class _NewCalledScreenState extends State<NewCalledScreen> {
                   height: 5,
                 ),
                 CustomFormBuilderNoBorder(
-                  text: 'name',
+                  text: 'employee_name',
                   initialValue: widget.employeeModel.name ?? '',
                   enabled: true,
                   action: TextInputAction.next,
@@ -105,7 +115,7 @@ class _NewCalledScreenState extends State<NewCalledScreen> {
                   height: 5,
                 ),
                 CustomFormBuilderNoBorder(
-                  text: 'email',
+                  text: 'employee_email',
                   initialValue: widget.employeeModel.email ?? '',
                   enabled: false,
                   obscureText: false,
@@ -130,25 +140,17 @@ class _NewCalledScreenState extends State<NewCalledScreen> {
                           );
                         default:
                       }
-                      return Column(
-                        children: [
-                          CustomExpansionTileCard(
-                            title: 'Selecione uma categoria',
-                            widget: FormBuilderRadioGroup(
-                              decoration: InputDecoration(
-                                border: InputBorder.none,
-                              ),
-                              name: 'category',
-                              focusNode: _focusNode,
-                              validator: FormBuilderValidators.required(context),
-                              initialValue: categoryBloc.categories,
-                              options: categoryBloc.categories.map((e) => FormBuilderFieldOption(
-                                child: Align(alignment: Alignment.topLeft, child: Text(e.name, style: titleForms,)), value: e.id,
-                              )).toList(growable: false),
-                            )
-                            ,
-                          ),
-                        ],
+                      return FormBuilderRadioGroup(
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                        ),
+                        name: 'category_id',
+                        focusNode: _focusNode,
+                        validator: FormBuilderValidators.required(context),
+                        initialValue: categoryBloc.categories,
+                        options: categoryBloc.categories.map((e) => FormBuilderFieldOption(
+                          child: Align(alignment: Alignment.topLeft, child: Text(e.name, style: titleForms,)), value: e.id,
+                        )).toList(growable: false),
                       );
                     }
                 ),
@@ -158,6 +160,35 @@ class _NewCalledScreenState extends State<NewCalledScreen> {
               ],
             ),
           ),
+        ),
+      ),
+      bottomNavigationBar:  Padding(
+        padding: EdgeInsets.only(bottom: 20, left: 20, right: 20),
+        child: StreamBuilder(
+          initialData: [],
+          stream: calledBloc.loading,
+          builder: (context, snapshot) {
+            if (snapshot.data != true) {
+              return CustomButton(
+                widget: Text('criar chamado', style: buttonColors,),
+                onPressed: () async {
+                  if (_formKey.currentState.validate()) {
+                    _formKey.currentState.save();
+                    var newItem = CalledModel.fromMapping(
+                        _formKey.currentState.value);
+                    await calledBloc.createCalledRequest(calledModel: newItem, employeeModel: employeeBloc.userLocal);
+                    requestFocus();
+                    Get.offAll(() => MainModule());
+                  }
+                },
+              );
+            } else {
+              return CustomButton(
+                onPressed: () {},
+                widget: CustomColorCircularProgressIndicator(),
+              );
+            }
+          },
         ),
       ),
     );

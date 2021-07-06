@@ -1,5 +1,6 @@
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
+import 'package:share_it/blocs/called_bloc.dart';
 import 'package:share_it/blocs/category_bloc.dart';
 import 'package:share_it/models/employee_model.dart';
 import 'package:share_it/screens/new_called/new_called_screen.dart';
@@ -11,7 +12,8 @@ class NewCalledModule extends ModuleWidget {
 
   @override
   List<Bloc> get blocs => [
-    Bloc((i) => CategoryBloc())
+    Bloc((i) => CategoryBloc()),
+    Bloc((i) => CalledBloc())
   ];
 
   @override

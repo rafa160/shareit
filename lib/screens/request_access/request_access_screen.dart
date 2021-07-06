@@ -285,7 +285,7 @@ class _RequestAccessScreenState extends State<RequestAccessScreen> {
                       }
                     },
                   ),
-                )
+                ),
               ],
             ),
           ),
