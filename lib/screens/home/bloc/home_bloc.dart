@@ -22,10 +22,12 @@ class HomeBloc extends BlocBase {
 
   Stream<List> todayCalledStreamList;
   Stream<List> yesterdayCalledStreamList;
+  Stream<List> monthCalledStreamList;
   StreamSubscription streamSubscription;
 
   List<CalledModel> todayCalledItems = [];
   List<CalledModel> yesterdayCalledItems = [];
+  List<CalledModel> monthCalledList = [];
 
   HomeBloc() {
     getTodayDateTime();
@@ -49,7 +51,7 @@ class HomeBloc extends BlocBase {
   Stream<List> getCalledItems(EmployeeBloc employeeBloc) {
     return todayCalledStreamList = _firebaseInstance
         .collection('called_requests')
-        .where('company_id', isEqualTo: employeeBloc.userLocal.companyId)
+        .where('company_id', isEqualTo: employeeBloc.user.companyId)
         .where('day',  isEqualTo: now.day)
         .snapshots()
         .map((event) =>
@@ -59,8 +61,18 @@ class HomeBloc extends BlocBase {
   Stream<List> getYesterdayCalledItems(EmployeeBloc employeeBloc) {
     return yesterdayCalledStreamList = _firebaseInstance
         .collection('called_requests')
-        .where('company_id', isEqualTo: employeeBloc.userLocal.companyId)
+        .where('company_id', isEqualTo: employeeBloc.user.companyId)
         .where('day',  isEqualTo: now.day - 1)
+        .snapshots()
+        .map((event) =>
+        event.docs.map((e) => CalledModel.fromDocument(e)).toList());
+  }
+
+  Stream<List> getMonthCalledList(EmployeeBloc employeeBloc) {
+    return monthCalledStreamList = _firebaseInstance
+        .collection('called_requests')
+        .where('company_id', isEqualTo: employeeBloc.user.companyId)
+        .where('month',  isEqualTo: now.month)
         .snapshots()
         .map((event) =>
         event.docs.map((e) => CalledModel.fromDocument(e)).toList());
@@ -68,7 +80,7 @@ class HomeBloc extends BlocBase {
 
   List<CalledModel> getListTodayCalledNumber(EmployeeBloc employeeBloc) {
     streamSubscription = _firebaseInstance.collection('called_requests')
-        .where('company_id', isEqualTo: employeeBloc.userLocal.companyId)
+        .where('company_id', isEqualTo: employeeBloc.user.companyId)
         .where('day', isEqualTo: now.day).snapshots().listen((event) {
           todayCalledItems.clear();
        for(final doc in event.docs) {
@@ -81,7 +93,7 @@ class HomeBloc extends BlocBase {
   List<CalledModel> getListYesterdayCalledNumber(EmployeeBloc employeeBloc) {
     var yesterday = now.day -1;
     streamSubscription = _firebaseInstance.collection('called_requests')
-        .where('company_id', isEqualTo: employeeBloc.userLocal.companyId)
+        .where('company_id', isEqualTo: employeeBloc.user.companyId)
         .where('day', isEqualTo: yesterday).snapshots().listen((event) {
       yesterdayCalledItems.clear();
       for(final doc in event.docs) {
@@ -89,6 +101,19 @@ class HomeBloc extends BlocBase {
       }
     });
     return yesterdayCalledItems;
+  }
+
+  List<CalledModel> getListMonthCalledNumber(EmployeeBloc employeeBloc) {
+
+    streamSubscription = _firebaseInstance.collection('called_requests')
+        .where('company_id', isEqualTo: employeeBloc.user.companyId)
+        .where('month', isEqualTo: now.month).snapshots().listen((event) {
+      monthCalledList.clear();
+      for(final doc in event.docs) {
+        monthCalledList.add(CalledModel.fromDocument(doc));
+      }
+    });
+    return monthCalledList;
   }
 
   @override

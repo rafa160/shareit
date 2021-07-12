@@ -79,3 +79,8 @@ TextStyle homeMessage = GoogleFonts.nunito(
   fontSize: 22,
   fontWeight: FontWeight.bold,
 );
+
+TextStyle splashTitle = GoogleFonts.nunito(
+  fontSize: 30,
+  fontWeight: FontWeight.bold,
+);

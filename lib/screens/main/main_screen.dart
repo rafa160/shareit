@@ -44,6 +44,7 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context);
     return Scaffold(
         body: PageView(
             physics: NeverScrollableScrollPhysics(),

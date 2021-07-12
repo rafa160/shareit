@@ -3,8 +3,10 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:share_it/app_module.dart';
 import 'package:share_it/blocs/employee_bloc.dart';
+import 'package:share_it/components/custom_called_card.dart';
 import 'package:share_it/components/custom_circular_progress_indicator.dart';
 import 'package:share_it/components/custom_color_circular_progress_indicator.dart';
 import 'package:share_it/components/custom_named_icon.dart';
@@ -24,15 +26,17 @@ class _HomeScreenState extends State<HomeScreen> {
   var homeBloc = HomeModule.to.getBloc<HomeBloc>();
   List<CalledModel> todayListNumber = [];
   List<CalledModel> yesterdayListNumber = [];
+  List<CalledModel> monthList = [];
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     todayListNumber = homeBloc.getListTodayCalledNumber(employeeBloc);
     yesterdayListNumber = homeBloc.getListYesterdayCalledNumber(employeeBloc);
+    monthList = homeBloc.getListMonthCalledNumber(employeeBloc);
     homeBloc.getCalledItems(employeeBloc);
     homeBloc.getYesterdayCalledItems(employeeBloc);
+    homeBloc.getMonthCalledList(employeeBloc);
   }
 
   @override
@@ -40,6 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
               height: 30,
@@ -136,14 +141,28 @@ class _HomeScreenState extends State<HomeScreen> {
                           }
                       ),
                       Spacer(),
-                      NamedIcon(
-                        text: 'mês',
-                        icon: FaIcon(
-                          FontAwesomeIcons.calendarAlt,
-                          size: 30,
-                        ),
-                        notificationCount: 11,
-                        onTap: () {},
+                      StreamBuilder(
+                          initialData: monthList,
+                          stream: homeBloc.monthCalledStreamList,
+                          builder: (context, snapshot) {
+                            switch (snapshot.connectionState) {
+                              case ConnectionState.none:
+                              case ConnectionState.waiting:
+                                return Center(
+                                  child: CustomCircularProgressIndicator(),
+                                );
+                              default:
+                            }
+                            return NamedIcon(
+                              text: 'mês',
+                              icon: FaIcon(
+                                FontAwesomeIcons.calendarAlt,
+                                size: 30,
+                              ),
+                              notificationCount: monthList.length,
+                              onTap: () {},
+                            );
+                          }
                       ),
                       SizedBox(
                         width: 20,
@@ -153,6 +172,64 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
+            SizedBox(
+              height: 20,
+            ),
+            StreamBuilder(
+                stream: homeBloc.todayDateTime$,
+                builder: (context, snapshot) {
+                  switch (snapshot.connectionState) {
+                    case ConnectionState.none:
+                    case ConnectionState.waiting:
+                      return Center(
+                        child: CustomCircularProgressIndicator(),
+                      );
+                    default:
+                  }
+                  var dateString = DateFormat('dd/MM/yyyy').format(snapshot.data);
+                  return Padding(
+                    padding: const EdgeInsets.only(left: 20, right: 20),
+                    child: Text(
+                        'Chamados do dia $dateString',
+                      style: titlePlanCard,
+                    ),
+                  );
+                }
+            ),
+            StreamBuilder(
+                initialData: todayListNumber,
+                stream: homeBloc.todayCalledStreamList,
+                builder: (context, snapshot) {
+                  switch (snapshot.connectionState) {
+                    case ConnectionState.none:
+                    case ConnectionState.waiting:
+                      return Center(
+                        child: CustomCircularProgressIndicator(),
+                      );
+                    default:
+                  }
+                  return ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: snapshot.data.length,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        CalledModel item = snapshot.data[index];
+                        var dateCreatedString = DateFormat('dd/MM hh:mm').format(item.calledCreatedTime);
+                        var dateFinishedString =  item.calledFinishedTime != null ? DateFormat('dd/MM hh:mm').format(item.calledFinishedTime) : '';
+                        return Padding(
+                          padding: const EdgeInsets.only(left: 20, right: 20),
+                          child: CustomCalledCard(
+                            email: item.employeeEmail,
+                            subject: item.subject,
+                            createdDate: dateCreatedString,
+                            finishedDate: dateFinishedString,
+                          ),
+                        );
+                      }
+                  );
+                }
+            ),
+
           ],
         ),
       ),

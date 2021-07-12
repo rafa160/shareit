@@ -14,16 +14,25 @@ class CalledBloc extends BlocBase {
 
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
 
-  Future<void> createCalledRequest({CalledModel calledModel, EmployeeModel employeeModel}) async {
+  Future<void> createCalledRequest(
+      {CalledModel calledModel, EmployeeModel employeeModel}) async {
     try {
       var day = DateTime.now();
       _streamLoadingController.add(true);
-      calledModel.calledCreatedTime = day;
-      calledModel.companyId = employeeModel.companyId;
-      calledModel.day = day.day;
-      calledModel.moth = day.month;
-      calledModel.year =day.year;
-      await _fireStore.collection('called_requests').add(calledModel.toJson());
+      Map<String, dynamic> data = {
+        'subject': calledModel.subject,
+        'employee_name': calledModel.employeeName,
+        'employee_email': calledModel.employeeEmail,
+        'company_id': employeeModel.companyId,
+        'category_id': calledModel.categoryId,
+        'called_created': day,
+        'day': day.day,
+        'month': day.month,
+        'year': day.year,
+        'called_finished': calledModel.calledFinishedTime,
+        'status': true
+      };
+      await _fireStore.collection('called_requests').add(data);
       _streamLoadingController.add(false);
       CustomToast.success('Chamado criado com sucesso');
     } catch (e) {
