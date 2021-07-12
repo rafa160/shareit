@@ -64,7 +64,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       name: employee.name,
                       email: employee.email,
                       role: employee.statusText,
-                      iconButton:     IconButton(
+                      iconButton:  IconButton(
                           icon: isDarkTheme != true
                               ? FaIcon(
                             FontAwesomeIcons.solidSun,
@@ -94,7 +94,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   FontAwesomeIcons.cog
                 ),
                 onTap: (){
-                  Get.to(() => EditProfileModule(employeeBloc.userLocal));
+                  Get.to(() => EditProfileModule(employeeBloc.user));
                 },
               ),
               Padding(
