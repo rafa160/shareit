@@ -21,7 +21,6 @@ class EmployeeBloc extends BlocBase {
 
   UserCredential userCredential;
   EmployeeModel user;
-  EmployeeModel  userLocal;
 
   Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   final _user$ = BehaviorSubject<EmployeeModel>.seeded(null);
@@ -107,7 +106,7 @@ class EmployeeBloc extends BlocBase {
       user = await getUserModel(id: userCredential.user.uid);
       await _saveUserData();
       await isLogged();
-      if(userLocal.finishTour == false) {
+      if(user.finishTour == false) {
         // Get.offAll(() => TourScreen());
       } else {
         Get.offAll(() => MainModule());
@@ -191,7 +190,7 @@ class EmployeeBloc extends BlocBase {
 
   Future<void> updateEmployee({EmployeeBloc employeeBloc, EmployeeModel employeeModel}) async {
     _streamController.add(true);
-    userLocal = await loggedUserAsync();
+    user = await loggedUserAsync();
     Map<String, dynamic> userData = {
       "name": employeeModel.name
     };

@@ -7,6 +7,7 @@ class CategoryBloc extends BlocBase {
   final _firebaseInstance = FirebaseFirestore.instance;
 
   List<CategoryModel> categories = [];
+  CategoryModel categoryModel;
 
   CategoryBloc() {
     getCategories();
@@ -17,6 +18,12 @@ class CategoryBloc extends BlocBase {
     categories = snapshot.docs.map((e) => CategoryModel.fromDocument(e)).toList();
     print(categories.toString());
     return categories;
+  }
+
+  Future<CategoryModel> getCategoryById(String id) async {
+    final DocumentSnapshot documentSnapshot = await _firebaseInstance.collection('categories').doc(id).get();
+    categoryModel = CategoryModel.fromDocument(documentSnapshot);
+    return categoryModel;
   }
 
 }

@@ -30,7 +30,8 @@ class CalledBloc extends BlocBase {
         'month': day.month,
         'year': day.year,
         'called_finished': calledModel.calledFinishedTime,
-        'status': true
+        'status': true,
+        'comment': calledModel.comment
       };
       await _fireStore.collection('called_requests').add(data);
       _streamLoadingController.add(false);
@@ -38,6 +39,24 @@ class CalledBloc extends BlocBase {
     } catch (e) {
       _streamLoadingController.add(false);
       CustomToast.fail('erro ao tentar criar chamado');
+    }
+  }
+
+  Future<void> update({CalledModel calledModel, String comment}) async {
+    try {
+      _streamLoadingController.add(true);
+      var day = DateTime.now();
+      Map<String, dynamic> data = {
+        'called_finished': day,
+        'comment': comment,
+        'status': false,
+      };
+      await _fireStore.collection('called_requests').doc(calledModel.id).update(data);
+      _streamLoadingController.add(false);
+      CustomToast.success('Chamado finalizado com sucesso');
+    } catch (e) {
+      _streamLoadingController.add(false);
+      CustomToast.fail('erro ao fechar o chamado');
     }
   }
 

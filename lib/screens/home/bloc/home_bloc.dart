@@ -52,7 +52,7 @@ class HomeBloc extends BlocBase {
     return todayCalledStreamList = _firebaseInstance
         .collection('called_requests')
         .where('company_id', isEqualTo: employeeBloc.user.companyId)
-        .where('day',  isEqualTo: now.day)
+        .where('day',  isEqualTo: now.day).where('status', isEqualTo: true)
         .snapshots()
         .map((event) =>
             event.docs.map((e) => CalledModel.fromDocument(e)).toList());
