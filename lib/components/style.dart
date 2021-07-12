@@ -42,6 +42,11 @@ TextStyle titlePlanCard = GoogleFonts.nunito(
   fontWeight: FontWeight.bold,
 );
 
+TextStyle dayTitle = GoogleFonts.nunito(
+  fontSize: 16,
+  fontWeight: FontWeight.bold,
+);
+
 TextStyle buttonColors = GoogleFonts.nunito(
   fontSize: 14,
   color: Colors.white,
@@ -82,5 +87,10 @@ TextStyle homeMessage = GoogleFonts.nunito(
 
 TextStyle splashTitle = GoogleFonts.nunito(
   fontSize: 30,
+  fontWeight: FontWeight.bold,
+);
+
+TextStyle timeText = GoogleFonts.nunito(
+  fontSize: 12,
   fontWeight: FontWeight.bold,
 );

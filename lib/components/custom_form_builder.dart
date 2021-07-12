@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:share_it/components/style.dart';
 
 class CustomFormBuilderNoBorder extends StatelessWidget {
   final String text;
@@ -14,23 +15,29 @@ class CustomFormBuilderNoBorder extends StatelessWidget {
   final String initialValue;
   final Function onChanged;
   final int maxLength;
+  final FocusNode focusNode;
 
-  const CustomFormBuilderNoBorder({Key key, this.text, this.action, this.type, this.obscureText, this.validator,this.hint, this.enabled,this.initialValue, this.onChanged, this.maxLength, this.input}) : super(key: key);
+  const CustomFormBuilderNoBorder(
+      {Key key, this.text, this.action, this.type, this.obscureText, this.validator, this.hint, this.enabled, this.initialValue, this.onChanged, this.maxLength, this.input, this.focusNode})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 50,
+      height: 55,
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
       decoration: BoxDecoration(
         color:Colors.green[200],
         borderRadius: BorderRadius.circular(10),
       ),
       child: FormBuilderTextField(
+        focusNode: focusNode,
+        style: textPlanCard,
         onChanged: onChanged,
         enabled: enabled,
         initialValue: initialValue,
         name: text,
+        autocorrect: false,
         validator: validator,
         textInputAction: action,
         keyboardType: type,

@@ -8,6 +8,7 @@ class CalledModel {
   String employeeName;
   String employeeEmail;
   String categoryId;
+  String comment;
   int day;
   int month;
   int year;
@@ -25,6 +26,7 @@ class CalledModel {
       this.categoryModel,
       this.calledCreatedTime,
       this.calledFinishedTime,
+      this.comment,
       this.companyId, this.categoryId,this.day, this.month, this.year, this.status});
 
   CalledModel.fromDocument(DocumentSnapshot snapshot) {
@@ -46,6 +48,7 @@ class CalledModel {
     month = snapshot.get('month');
     year = snapshot.get('year');
     status = snapshot.get('status');
+    comment = snapshot.get('comment');
   }
 
   CalledModel.fromMapping(Map<String, dynamic> map) {
@@ -55,6 +58,7 @@ class CalledModel {
     companyId = map['company_id'];
     categoryId = map['category_id'];
     status = map['status'];
+    comment = map['comment'];
   }
 
   Map<String, dynamic> toJson() => {
@@ -68,6 +72,7 @@ class CalledModel {
     'month': month,
     'year': year,
     'called_finished': calledFinishedTime,
-    'status': status
+    'status': status,
+    'comment': comment
   };
 }
