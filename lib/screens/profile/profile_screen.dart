@@ -108,7 +108,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     FontAwesomeIcons.file
                 ),
                 onTap: (){
-                  Get.to(() => ContractModule(companyId: employeeBloc.userLocal.companyId,));
+                  Get.to(() => ContractModule(companyId: employeeBloc.user.companyId,));
                 },
               ),
               Padding(

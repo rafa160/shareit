@@ -104,7 +104,7 @@ class EmployeeBloc extends BlocBase {
     try {
       userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
       var token = await FirebaseAuth.instance.currentUser.getIdToken();
-      userLocal = await getUserModel(id: userCredential.user.uid);
+      user = await getUserModel(id: userCredential.user.uid);
       await _saveUserData();
       await isLogged();
       if(userLocal.finishTour == false) {
@@ -151,12 +151,12 @@ class EmployeeBloc extends BlocBase {
     }
 
     Map<String, dynamic> userData = {
-      "id": userLocal.id,
-      "email": userLocal.email,
-      "name": userLocal.name,
-      "finish_tour":  userLocal.finishTour,
-      "available":  userLocal.available,
-      "company_id": userLocal.companyId
+      "id": user.id,
+      "email": user.email,
+      "name": user.name,
+      "finish_tour":  user.finishTour,
+      "available":  user.available,
+      "company_id": user.companyId
     };
 
     DocumentSnapshot userModel = await getUser(userId: userCredential.user.uid);
@@ -197,7 +197,7 @@ class EmployeeBloc extends BlocBase {
     };
     _fireStore
         .collection('users')
-        .doc(userLocal.id).update(userData);
+        .doc(user.id).update(userData);
     CustomToast.success('Úsuario terá dados atualizados após proxima recarga.');
     print(employeeModel.toString());
     _streamController.add(false);
