@@ -88,19 +88,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   SizedBox(
                     height: 20,
                   ),
-                  // Text(
-                  //   'função',
-                  //   style: textPlanCard,
-                  // ),
-                  // SizedBox(
-                  //   height: 10,
-                  // ),
-                  // CustomFormBuilderNoBorder(
-                  //   text: 'role',
-                  //   initialValue: widget.employeeModel.statusText,
-                  //   enabled: false,
-                  //   obscureText: false,
-                  // ),
                 ],
               ),
             ),
