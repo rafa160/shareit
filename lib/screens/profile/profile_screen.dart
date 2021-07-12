@@ -67,12 +67,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       iconButton:  IconButton(
                           icon: isDarkTheme != true
                               ? FaIcon(
-                            FontAwesomeIcons.solidSun,
+                            FontAwesomeIcons.solidMoon,
                             size: 20,
                             color: Colors.green,
                           )
                               : FaIcon(
-                            FontAwesomeIcons.solidMoon,
+                            FontAwesomeIcons.solidSun,
                             size: 20,
                           ),
                           onPressed: () {

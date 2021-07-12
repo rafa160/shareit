@@ -55,7 +55,7 @@ class _MainScreenState extends State<MainScreen> {
               Container(
                 color: Colors.redAccent,
               ),
-              NewCalledModule(employeeBloc.userLocal),
+              NewCalledModule(employeeBloc.user),
               Container(
                 color: Colors.white,
               ),

@@ -176,7 +176,7 @@ class _NewCalledScreenState extends State<NewCalledScreen> {
                     _formKey.currentState.save();
                     var newItem = CalledModel.fromMapping(
                         _formKey.currentState.value);
-                    await calledBloc.createCalledRequest(calledModel: newItem, employeeModel: employeeBloc.userLocal);
+                    await calledBloc.createCalledRequest(calledModel: newItem, employeeModel: employeeBloc.user);
                     requestFocus();
                     Get.offAll(() => MainModule());
                   }

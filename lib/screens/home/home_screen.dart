@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:share_it/app_module.dart';
 import 'package:share_it/blocs/employee_bloc.dart';
@@ -13,6 +14,7 @@ import 'package:share_it/components/custom_named_icon.dart';
 import 'package:share_it/components/style.dart';
 import 'package:share_it/models/called_model.dart';
 import 'package:share_it/models/employee_model.dart';
+import 'package:share_it/screens/called_details/called_details_module.dart';
 import 'package:share_it/screens/home/bloc/home_bloc.dart';
 import 'package:share_it/screens/home/home_module.dart';
 
@@ -190,8 +192,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   return Padding(
                     padding: const EdgeInsets.only(left: 20, right: 20),
                     child: Text(
-                        'Chamados do dia $dateString',
-                      style: titlePlanCard,
+                        'Chamados em aberto do dia $dateString',
+                      style: dayTitle,
                     ),
                   );
                 }
@@ -218,11 +220,18 @@ class _HomeScreenState extends State<HomeScreen> {
                         var dateFinishedString =  item.calledFinishedTime != null ? DateFormat('dd/MM hh:mm').format(item.calledFinishedTime) : '';
                         return Padding(
                           padding: const EdgeInsets.only(left: 20, right: 20),
-                          child: CustomCalledCard(
-                            email: item.employeeEmail,
-                            subject: item.subject,
-                            createdDate: dateCreatedString,
-                            finishedDate: dateFinishedString,
+                          child: GestureDetector(
+                            onTap: employeeBloc.user.status.index != 1 ? () async {
+                              await Get.to(() => CalledDetailsModule(calledModel: item,));
+                            } : (){
+
+                            },
+                            child: CustomCalledCard(
+                              email: item.employeeEmail,
+                              subject: item.subject,
+                              createdDate: dateCreatedString,
+                              finishedDate: dateFinishedString,
+                            ),
                           ),
                         );
                       }
