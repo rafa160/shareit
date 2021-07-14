@@ -51,7 +51,7 @@ class EmployeeModel {
     email = json['email'];
     available = json['available'];
     finishTour = json['finish_tour'];
-    status = json['role'];
+    status = EmployeeStatus.values[json['status'] as int];
     companyId = json['company_id'];
   }
 

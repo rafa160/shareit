@@ -155,7 +155,8 @@ class EmployeeBloc extends BlocBase {
       "name": user.name,
       "finish_tour":  user.finishTour,
       "available":  user.available,
-      "company_id": user.companyId
+      "company_id": user.companyId,
+      "status": user.status.index
     };
 
     DocumentSnapshot userModel = await getUser(userId: userCredential.user.uid);
