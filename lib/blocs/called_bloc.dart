@@ -13,9 +13,7 @@ class CalledBloc extends BlocBase {
   Stream get loading => _streamLoadingController.stream;
   Sink get loadingSink => _streamLoadingController.sink;
 
-  Stream<List> myCalledStreamList;
   List<CalledModel> myCalledItems = [];
-  StreamSubscription streamSubscription;
 
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
 
@@ -36,7 +34,8 @@ class CalledBloc extends BlocBase {
         'year': day.year,
         'called_finished': calledModel.calledFinishedTime,
         'status': true,
-        'comment': calledModel.comment
+        'comment': calledModel.comment,
+        'employee_id': employeeModel.id
       };
       await _fireStore.collection('called_requests').add(data);
       _streamLoadingController.add(false);
@@ -64,48 +63,18 @@ class CalledBloc extends BlocBase {
       CustomToast.fail('erro ao fechar o chamado');
     }
   }
-  
-  Stream<List> getMyCalledList({EmployeeBloc employeeBloc}) {
-    if(employeeBloc.user.status.index != 1) {
-      return myCalledStreamList = _fireStore.collection('called_request')
-        .where('company_id', isEqualTo: employeeBloc.user.companyId)
-            .snapshots()
-            .map((event) =>
-                event.docs.map((e) => CalledModel.fromDocument(e)).toList());
-    } else {
-      return myCalledStreamList = _fireStore.collection('called_request')
-          .where('company_id', isEqualTo: employeeBloc.user.companyId).where('employee_email', isEqualTo: employeeBloc.user.email)
-          .snapshots()
-          .map((event) =>
-          event.docs.map((e) => CalledModel.fromDocument(e)).toList());
-    }
-  }
 
-  List<CalledModel> getCalledModelList({EmployeeBloc employeeBloc}) {
+  Future<List<CalledModel>> getCalledModelList({EmployeeBloc employeeBloc}) async {
     if (employeeBloc.user.status.index != 1) {
-      streamSubscription = _fireStore
-          .collection('called_requests')
-          .where('company_id', isEqualTo: employeeBloc.user.companyId)
-          .snapshots()
-          .listen((event) {
-        myCalledItems.clear();
-        for (final doc in event.docs) {
-          myCalledItems.add(CalledModel.fromDocument(doc));
-        }
-      });
+      final QuerySnapshot snapshot = await _fireStore.collection('called_requests')
+          .where('company_id', isEqualTo: employeeBloc.user.companyId).get();
+      myCalledItems = snapshot.docs.map((e) => CalledModel.fromDocument(e)).toList();
       return myCalledItems;
     } else {
-      streamSubscription = _fireStore
-          .collection('called_requests')
-          .where('company_id', isEqualTo: employeeBloc.user.companyId)
-          .where('employee_email', isEqualTo: employeeBloc.user.email)
-          .snapshots()
-          .listen((event) {
-        myCalledItems.clear();
-        for (final doc in event.docs) {
-          myCalledItems.add(CalledModel.fromDocument(doc));
-        }
-      });
+      final QuerySnapshot snapshot = await _fireStore.collection('called_requests')
+          .where('employee_id', isEqualTo: employeeBloc.user.id)
+          .where('company_id', isEqualTo: employeeBloc.user.companyId).get();
+      myCalledItems = snapshot.docs.map((e) => CalledModel.fromDocument(e)).toList();
       return myCalledItems;
     }
   }
@@ -114,6 +83,6 @@ class CalledBloc extends BlocBase {
   void dispose() {
     super.dispose();
     _streamLoadingController.close();
-    streamSubscription.cancel();
+    // streamSubscription.cancel();
   }
 }
