@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -6,6 +8,7 @@ import 'package:share_it/blocs/employee_bloc.dart';
 import 'package:share_it/components/custom_icon_button.dart';
 import 'package:share_it/components/custom_rounded_button.dart';
 import 'package:share_it/screens/home/home_module.dart';
+import 'package:share_it/screens/my_calleds/my_called_module.dart';
 import 'package:share_it/screens/new_called/new_called_module.dart';
 import 'package:share_it/screens/profile/profile_module.dart';
 
@@ -52,9 +55,7 @@ class _MainScreenState extends State<MainScreen> {
             onPageChanged: onPageChanged,
             children: <Widget>[
               HomeModule(),
-              Container(
-                color: Colors.redAccent,
-              ),
+              MyCalledModule(employeeBloc),
               NewCalledModule(employeeBloc.user),
               Container(
                 color: Colors.white,

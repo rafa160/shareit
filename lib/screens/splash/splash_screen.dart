@@ -36,6 +36,8 @@ class _SplashScreenState extends State<SplashScreen> {
       else {
         await Get.offAll(() => LoginModule());
       }
+    } else {
+      await Get.offAll(() => LoginModule());
     }
   }
 
