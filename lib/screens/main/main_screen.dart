@@ -8,6 +8,7 @@ import 'package:share_it/blocs/employee_bloc.dart';
 import 'package:share_it/components/custom_icon_button.dart';
 import 'package:share_it/components/custom_rounded_button.dart';
 import 'package:share_it/screens/home/home_module.dart';
+import 'package:share_it/screens/info/bloc/info_bloc.dart';
 import 'package:share_it/screens/info/info_module.dart';
 import 'package:share_it/screens/my_calleds/my_called_module.dart';
 import 'package:share_it/screens/new_called/new_called_module.dart';
@@ -23,6 +24,7 @@ class _MainScreenState extends State<MainScreen> {
   int _page = 0;
 
   var employeeBloc = AppModule.to.getBloc<EmployeeBloc>();
+  var infoBloc = AppModule.to.getBloc<InfoBloc>();
 
   @override
   void initState() {
