@@ -27,7 +27,7 @@ class CustomFormBuilderNoBorder extends StatelessWidget {
       height: 55,
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
       decoration: BoxDecoration(
-        color:Colors.green[200],
+        color:Colors.blue[200],
         borderRadius: BorderRadius.circular(10),
       ),
       child: FormBuilderTextField(

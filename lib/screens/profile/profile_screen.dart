@@ -69,7 +69,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ? FaIcon(
                             FontAwesomeIcons.solidMoon,
                             size: 20,
-                            color: Colors.green,
+                            // color: Colors.,
                           )
                               : FaIcon(
                             FontAwesomeIcons.solidSun,

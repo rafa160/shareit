@@ -15,8 +15,8 @@ class ThemeDark {
         brightness: Brightness.dark,
         centerTitle: true,
         elevation: 0,
-        actionsIconTheme: IconThemeData(color: green),
-        iconTheme: IconThemeData(color: green));
+        actionsIconTheme: IconThemeData(color: Colors.blue),
+        iconTheme: IconThemeData(color: Colors.blue));
   }
 
   static CardTheme createCardTheme() {
@@ -37,14 +37,14 @@ class ThemeDark {
     backgroundColor: background,
     dividerColor: white,
     errorColor: red1,
-    primaryColor: green,
-    accentColor: green,
+    primaryColor: Colors.blue,
+    accentColor: Colors.blue,
     primaryColorLight: background,
     primaryColorDark: white,
     scaffoldBackgroundColor: background,
     cardTheme: createCardTheme(),
     iconTheme: IconThemeData(
-      color: green,
+      color: Colors.blue,
       opacity: 1,
       size: 24,
     ),

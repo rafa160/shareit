@@ -190,11 +190,11 @@ class EmployeeBloc extends BlocBase {
     return preference.get('users') != null;
   }
 
-  Future<void> updateEmployee({EmployeeBloc employeeBloc, EmployeeModel employeeModel}) async {
+  Future<void> updateEmployee({EmployeeBloc employeeBloc, EmployeeModel employeeModel, String name}) async {
     _streamController.add(true);
     user = await loggedUserAsync();
     Map<String, dynamic> userData = {
-      "name": employeeModel.name
+      "name": name
     };
     _fireStore
         .collection('users')

@@ -18,7 +18,6 @@ class CustomModalBottomSheet extends StatelessWidget {
       color: Colors.transparent,
       child: Container(
         decoration: new BoxDecoration(
-            color: Colors.white,
             borderRadius: new BorderRadius.only(
                 topLeft: const Radius.circular(10.0),
                 topRight: const Radius.circular(10.0))),
@@ -33,8 +32,7 @@ class CustomModalBottomSheet extends StatelessWidget {
                 child: SizedBox(
                   height: 40,
                   child: Text('Olá,',
-                      style:
-                      TextStyle(color: Colors.black, fontSize: 16)),
+                      style:titleForms),
                 ),
               ),
               Padding(
@@ -44,7 +42,7 @@ class CustomModalBottomSheet extends StatelessWidget {
                   height: 40,
                   child: Text(title,
                       style:
-                      TextStyle(color: Colors.black, fontSize: 16)),
+                      titleForms),
                 ),
               ),
               Padding(

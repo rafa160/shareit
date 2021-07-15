@@ -104,9 +104,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         FocusScope.of(context).unfocus();
                         if(_formKey.currentState.validate()){
                           _formKey.currentState.save();
-                          var updateUser = EmployeeModel.fromJson(
-                              _formKey.currentState.value);
-                          await employeeBloc.updateEmployee(employeeBloc: employeeBloc, employeeModel: updateUser);
+                          var name = _formKey.currentState.value['name'];
+                          await employeeBloc.updateEmployee(employeeBloc: employeeBloc, name: name);
                           Get.back();
                         }
                       });

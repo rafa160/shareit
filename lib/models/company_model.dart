@@ -43,7 +43,7 @@ class CompanyModel {
     "document": document,
     "email": email,
     "phone": phone,
-    "planModel": planModel.toMap(),
+    "plan": planModel.toMap(),
     "available": available,
   };
 

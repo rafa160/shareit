@@ -22,7 +22,7 @@ class CustomCalledCard extends StatelessWidget {
             children: [
               Container(
                 decoration:  BoxDecoration(
-                  color: Colors.greenAccent,
+                  color: Colors.blueAccent,
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(10),
                       topRight: Radius.circular(10),

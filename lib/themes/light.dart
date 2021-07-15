@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class ThemeLight {
   static Color tableTitleColor = Color(0xff434343);
   static Color background = Color(0xffffffff);
-  static Color green = Colors.green;
+  static Color green = Colors.blue;
   static Color grey = Colors.grey;
   static Color red1 = Color(0xffC43131);
 

@@ -40,7 +40,7 @@ class NamedIcon extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                 decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.redAccent),
                 alignment: Alignment.center,
-                child: Text('$notificationCount'),
+                child: Text('$notificationCount', style: titleForms,),
               ),
             )
           ],
