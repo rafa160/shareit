@@ -10,6 +10,7 @@ import 'package:rxdart/rxdart.dart';
 import 'package:share_it/components/custom_toast.dart';
 import 'package:share_it/helpers/firebase_erros.dart';
 import 'package:share_it/models/employee_model.dart';
+import 'package:share_it/screens/login/login_module.dart';
 import 'package:share_it/screens/main/main_module.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -201,6 +202,25 @@ class EmployeeBloc extends BlocBase {
     CustomToast.success('Úsuario terá dados atualizados após proxima recarga.');
     print(employeeModel.toString());
     _streamController.add(false);
+  }
+
+  Future<void> resetPassword(String email) async {
+    try {
+      _streamController.add(true);
+      await _auth.sendPasswordResetEmail(email: email);
+      CustomToast.success('Solicitação enviada para email informado.');
+      _streamController.add(false);
+      await Get.offAll(() => LoginModule());
+    } on FirebaseAuthException catch (e) {
+      _streamController.add(false);
+      var error = getErrorString(e.code);
+      if (e.code != null) {
+        CustomToast.fail(error);
+      } else {
+        CustomToast.fail('Error');
+      }
+    }
+
   }
 
   @override

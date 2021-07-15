@@ -33,6 +33,7 @@ class NewCalledScreen extends StatefulWidget {
 class _NewCalledScreenState extends State<NewCalledScreen> {
 
   final GlobalKey<FormBuilderState> _formKey = GlobalKey<FormBuilderState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   var employeeBloc = AppModule.to.getBloc<EmployeeBloc>();
   var categoryBloc = NewCalledModule.to.getBloc<CategoryBloc>();
   var calledBloc = NewCalledModule.to.getBloc<CalledBloc>();
@@ -58,6 +59,7 @@ class _NewCalledScreenState extends State<NewCalledScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       body: SingleChildScrollView(
         child: FormBuilder(
           key: _formKey,
@@ -82,7 +84,7 @@ class _NewCalledScreenState extends State<NewCalledScreen> {
                   initialValue: '',
                   hint: 'assunto',
                   enabled: true,
-                  action: TextInputAction.next,
+                  action: TextInputAction.done,
                   type: TextInputType.text,
                   validator: FormBuilderValidators.compose([
                     FormBuilderValidators.required(context),
@@ -99,7 +101,7 @@ class _NewCalledScreenState extends State<NewCalledScreen> {
                 CustomFormBuilderNoBorder(
                   text: 'employee_name',
                   initialValue: widget.employeeModel.name ?? '',
-                  enabled: true,
+                  enabled: false,
                   action: TextInputAction.next,
                   type: TextInputType.text,
                   validator: FormBuilderValidators.compose([

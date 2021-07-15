@@ -11,6 +11,7 @@ import 'package:share_it/components/custom_form_builder.dart';
 import 'package:share_it/components/style.dart';
 import 'package:share_it/screens/login/login_module.dart';
 import 'package:share_it/screens/request_access/request_access_module.dart';
+import 'package:share_it/screens/reset_password/reset_password_module.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -75,7 +76,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Text('esqueceu sua senha?', style: titleForms,),
+                      GestureDetector(
+                        onTap: () {
+                          Get.to(() => ResetPasswordModule());
+                        },
+                          child: Text(
+                        'esqueceu sua senha?',
+                        style: titleForms,
+                      )),
                     ],
                   ),
                   SizedBox(

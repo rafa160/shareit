@@ -9,6 +9,7 @@ import 'package:share_it/blocs/company_bloc.dart';
 import 'package:share_it/blocs/plan_bloc.dart';
 import 'package:share_it/components/custom_button.dart';
 import 'package:share_it/components/custom_circular_progress_indicator.dart';
+import 'package:share_it/components/custom_color_circular_progress_indicator.dart';
 import 'package:share_it/components/custom_form_builder.dart';
 import 'package:share_it/components/custom_plan_card.dart';
 import 'package:share_it/components/style.dart';
@@ -212,7 +213,7 @@ class _RequestAccessScreenState extends State<RequestAccessScreen> {
                   hint: '(85) 98912-1111',
                   enabled: true,
                   maxLength: 11,
-                  action: TextInputAction.next,
+                  action: TextInputAction.done,
                   type: TextInputType.number,
                   validator: FormBuilderValidators.compose([
                     FormBuilderValidators.required(context),
@@ -280,7 +281,7 @@ class _RequestAccessScreenState extends State<RequestAccessScreen> {
                       } else {
                         return CustomButton(
                           onPressed: () {},
-                          widget: CustomCircularProgressIndicator(),
+                          widget: CustomColorCircularProgressIndicator(),
                         );
                       }
                     },
