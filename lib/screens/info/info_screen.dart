@@ -29,6 +29,7 @@ class _InfoScreenState extends State<InfoScreen> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
               height: 100,
@@ -123,25 +124,14 @@ class _InfoScreenState extends State<InfoScreen> {
                   ),
               ),
             ),
+            SizedBox(
+              height: 20,
+            ),
             IndicatorWidget(categories: infoBloc.categories,)
           ],
         ),
       ),
     );
   }
-
-  List<PieChartSectionData> getSections() => PieData().data.asMap().map<int, PieChartSectionData>((index, data) {
-    final value = PieChartSectionData(
-      color: data.color,
-      value: data.percent,
-      title: "${data.percent}",
-      titleStyle: TextStyle(
-        fontSize: 12,
-        fontWeight: FontWeight.bold,
-      )
-    );
-    return MapEntry(index, value);
-  }).values.toList();
-
 
 }
