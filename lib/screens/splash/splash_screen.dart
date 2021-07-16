@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:share_it/app_module.dart';
 import 'package:share_it/blocs/employee_bloc.dart';
+import 'package:share_it/components/logo_container.dart';
 import 'package:share_it/components/style.dart';
 import 'package:share_it/models/employee_model.dart';
 import 'package:share_it/screens/login/login_module.dart';
@@ -50,8 +51,8 @@ class _SplashScreenState extends State<SplashScreen> {
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
             colors: [
-              Colors.greenAccent,
-              Colors.grey,
+              Colors.white,
+              Colors.lightBlueAccent,
             ],
           ),
         ),
@@ -60,8 +61,8 @@ class _SplashScreenState extends State<SplashScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Center(
-                child: Text('ShareIT', style: splashTitle,),
+              LogoContainer(
+                tag: 'logo',
               ),
             ],
           ),

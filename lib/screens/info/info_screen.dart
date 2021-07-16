@@ -22,6 +22,7 @@ class _InfoScreenState extends State<InfoScreen> {
   void initState() {
     super.initState();
     infoBloc.syncCategories();
+    infoBloc.getAllList(employeeBloc.user);
   }
 
   @override
@@ -34,8 +35,7 @@ class _InfoScreenState extends State<InfoScreen> {
             SizedBox(
               height: 100,
             ),
-            LayoutBuilder(
-              builder:(context, constraint) => Card(
+             Card(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(120.0),
                 ),
@@ -64,55 +64,55 @@ class _InfoScreenState extends State<InfoScreen> {
                               sections: [
                                 PieChartSectionData(
                                   color: Colors.blue,
-                                  value: infoBloc.internetProblems.length.toDouble(),
+                                  value: infoBloc.internetProblems.length.toDouble() >= 1 ? infoBloc.internetProblems.length.toDouble() : 0.0,
                                   title: '${infoBloc.internetProblems.length}',
                                   titleStyle: subtitleProfileHeader,
                                 ),
                                 PieChartSectionData(
-                                  color: Colors.blueAccent,
-                                  value: infoBloc.reports.length.toDouble(),
+                                  color: Colors.lightBlueAccent,
+                                  value: infoBloc.reports.length.toDouble() >= 1 ? infoBloc.reports.length.toDouble() : 0.0,
                                   title: '${infoBloc.reports.length}',
                                   titleStyle: subtitleProfileHeader,
                                 ),
                                 PieChartSectionData(
                                   color: Colors.deepPurple,
-                                  value: infoBloc.others.length.toDouble(),
+                                  value: infoBloc.others.length.toDouble() >= 1 ? infoBloc.others.length.toDouble() : 0.0,
                                   title: '${infoBloc.others.length}',
                                   titleStyle: subtitleProfileHeader,
                                 ),
                                 PieChartSectionData(
                                   color: Colors.purple,
-                                  value: infoBloc.phoneProblems.length.toDouble(),
+                                  value: infoBloc.phoneProblems.length.toDouble() >= 1 ? infoBloc.phoneProblems.length.toDouble() : 0.0,
                                   title: '${infoBloc.phoneProblems.length}',
                                   titleStyle: subtitleProfileHeader,
                                 ),
                                 PieChartSectionData(
                                   color: Colors.deepOrange,
-                                  value: infoBloc.softwareIssues.length.toDouble(),
+                                  value: infoBloc.softwareIssues.length.toDouble() >= 1 ? infoBloc.softwareIssues.length.toDouble() : 0.0,
                                   title: '${infoBloc.softwareIssues.length}',
                                   titleStyle: subtitleProfileHeader,
                                 ),
                                 PieChartSectionData(
                                   color: Colors.red,
-                                  value: infoBloc.equipmentsIssues.length.toDouble(),
+                                  value: infoBloc.equipmentsIssues.length.toDouble() >= 1 ? infoBloc.equipmentsIssues.length.toDouble() : 0.0,
                                   title: '${infoBloc.equipmentsIssues.length}',
                                   titleStyle: subtitleProfileHeader,
                                 ),
                                 PieChartSectionData(
                                   color: Colors.yellow,
-                                  value: infoBloc.login.length.toDouble(),
+                                  value: infoBloc.login.length.toDouble() >= 1 ? infoBloc.login.length.toDouble() : 0.0,
                                   title: '${infoBloc.login.length}',
                                   titleStyle: subtitleProfileHeader,
                                 ),
                                 PieChartSectionData(
                                   color: Colors.green,
-                                  value: infoBloc.installEquipment.length.toDouble(),
+                                  value: infoBloc.installEquipment.length.toDouble() >= 1 ? infoBloc.installEquipment.length.toDouble() : 0.0,
                                   title: '${infoBloc.installEquipment.length}',
                                   titleStyle: subtitleProfileHeader,
                                 ),
                                 PieChartSectionData(
                                   color: Colors.black,
-                                  value: infoBloc.softwareInstall.length.toDouble(),
+                                  value: infoBloc.softwareInstall.length.toDouble() >= 1 ? infoBloc.softwareInstall.length.toDouble() : 0.0,
                                   title: '${infoBloc.softwareInstall.length}',
                                   titleStyle: subtitleProfileHeader,
                                 ),
@@ -123,7 +123,6 @@ class _InfoScreenState extends State<InfoScreen> {
                     ),
                   ),
               ),
-            ),
             SizedBox(
               height: 20,
             ),

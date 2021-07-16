@@ -8,6 +8,7 @@ import 'package:share_it/blocs/called_bloc.dart';
 import 'package:share_it/blocs/category_bloc.dart';
 import 'package:share_it/components/custom_button.dart';
 import 'package:share_it/components/custom_circular_progress_indicator.dart';
+import 'package:share_it/components/custom_color_circular_progress_indicator.dart';
 import 'package:share_it/components/custom_form_builder.dart';
 import 'package:share_it/components/date_card_info.dart';
 import 'package:share_it/components/style.dart';
@@ -166,7 +167,7 @@ class _CalledDetailsScreenState extends State<CalledDetailsScreen> {
             } else {
               return CustomButton(
                 onPressed: () {},
-                widget: CustomCircularProgressIndicator(),
+                widget: CustomColorCircularProgressIndicator(),
               );
             }
           },

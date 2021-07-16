@@ -8,6 +8,7 @@ import 'package:share_it/components/custom_button.dart';
 import 'package:share_it/components/custom_circular_progress_indicator.dart';
 import 'package:share_it/components/custom_color_circular_progress_indicator.dart';
 import 'package:share_it/components/custom_form_builder.dart';
+import 'package:share_it/components/logo_container.dart';
 import 'package:share_it/components/style.dart';
 import 'package:share_it/screens/login/login_module.dart';
 import 'package:share_it/screens/request_access/request_access_module.dart';
@@ -36,11 +37,20 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Padding(
               padding: const EdgeInsets.only(left: 20, right: 20),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                // mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   /// colocar logo posteriormente
                   SizedBox(
                     height: 20,
+                  ),
+                  Flexible(
+                    flex: 3,
+                    child: LogoContainer(
+                      tag: 'logo',
+                    ),
+                  ),
+                  SizedBox(
+                    height: 40,
                   ),
                   CustomFormBuilderNoBorder(
                     text: 'email',

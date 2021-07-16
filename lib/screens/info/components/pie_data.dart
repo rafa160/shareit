@@ -1,14 +1,10 @@
-
 import 'package:flutter/material.dart';
-import 'package:share_it/models/category_model.dart';
 
 class PieData {
-  final List<CategoryModel> categories;
-  PieData({this.categories});
 
   List<Data> data = [
     Data(name: 'Problemas com internet',  color: Colors.blue),
-    Data(name: 'Relatórios', color: Colors.blueAccent),
+    Data(name: 'Relatórios', color: Colors.lightBlueAccent),
     Data(name: 'Outros', color: Colors.deepPurple),
     Data(name: 'Problemas com telefonia', color: Colors.purple),
     Data(name: 'Manutenção de Software', color: Colors.deepOrange),
