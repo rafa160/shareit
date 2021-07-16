@@ -87,7 +87,7 @@ class _CalledDetailsScreenState extends State<CalledDetailsScreen> {
                   height: 100,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: Colors.green[200]
+                      color: Colors.blue[200]
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),

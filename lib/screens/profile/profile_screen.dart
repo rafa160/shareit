@@ -140,6 +140,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
               ),
+              SizedBox(height: 40,),
+              StreamBuilder(
+                stream: versionBloc.freeDays$,
+                builder: (context, snapshot){
+                  return !snapshot.data.hashCode.isNegative ? Text('Sua versão gratuita expira em ${snapshot.data} dias.', style: titleForms,) : Container();
+                },
+              ),
               SizedBox(height: 20,),
               StreamBuilder(
                 stream: versionBloc.streamVersion$,

@@ -19,7 +19,7 @@ class DateCardInfo extends StatelessWidget {
         maxHeight: double.infinity,
       ),
       decoration: BoxDecoration(
-          color: Colors.green[200],
+          color: Colors.blue[200],
           borderRadius: BorderRadius.all(Radius.circular(10))),
       child: Padding(
         padding: const EdgeInsets.all(2),
