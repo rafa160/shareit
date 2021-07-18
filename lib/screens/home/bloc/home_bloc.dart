@@ -5,7 +5,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:share_it/blocs/employee_bloc.dart';
 import 'package:share_it/models/called_model.dart';
-import 'package:share_it/models/employee_model.dart';
 
 class HomeBloc extends BlocBase {
 

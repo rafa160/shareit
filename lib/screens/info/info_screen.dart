@@ -6,8 +6,6 @@ import 'package:share_it/components/custom_circular_progress_indicator.dart';
 import 'package:share_it/components/style.dart';
 import 'package:share_it/screens/info/bloc/info_bloc.dart';
 import 'package:share_it/screens/info/components/indicator_widget.dart';
-import 'package:share_it/screens/info/components/pie_data.dart';
-import 'package:share_it/screens/info/info_module.dart';
 
 class InfoScreen extends StatefulWidget {
   @override
