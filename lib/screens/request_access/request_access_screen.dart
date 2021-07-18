@@ -14,7 +14,7 @@ import 'package:share_it/components/custom_form_builder.dart';
 import 'package:share_it/components/custom_plan_card.dart';
 import 'package:share_it/components/style.dart';
 import 'package:share_it/models/company_model.dart';
-import 'package:share_it/screens/login/login_module.dart';
+import 'package:share_it/screens/register_employee/register_employee_module.dart';
 import 'package:share_it/screens/request_access/request_access_module.dart';
 
 class RequestAccessScreen extends StatefulWidget {
@@ -26,7 +26,7 @@ class _RequestAccessScreenState extends State<RequestAccessScreen> {
   var planBloc = RequestAccessModule.to.getBloc<PlanBloc>();
   var companyBloc = RequestAccessModule.to.getBloc<CompanyBloc>();
   final GlobalKey<FormBuilderState> _formKey = GlobalKey<FormBuilderState>();
-  String radioItem = 'Small Plan';
+
   int index = 0;
   FocusNode _focusNode = FocusNode();
 
@@ -274,7 +274,7 @@ class _RequestAccessScreenState extends State<RequestAccessScreen> {
                                   _formKey.currentState.value);
                               await companyBloc.createCompanyPreOrder(newItem);
                               requestFocus();
-                              Get.offAll(() => LoginModule());
+                              Get.offAll(() => RegisterEmployeeModule(newItem, companyBloc.id));
                             }
                           },
                         );
