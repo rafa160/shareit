@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:share_it/components/custom_toast.dart';
 import 'package:share_it/helpers/firebase_erros.dart';
+import 'package:share_it/models/company_model.dart';
 import 'package:share_it/models/employee_model.dart';
 import 'package:share_it/screens/login/login_module.dart';
 import 'package:share_it/screens/main/main_module.dart';
@@ -36,7 +37,7 @@ class EmployeeBloc extends BlocBase {
   Stream get loginStream => _streamController.stream;
   Sink get loginSink => _streamController.sink;
 
-
+  int count = 0;
 
   Stream<EmployeeModel> get userOut => _user$.stream
       .asyncMap((v) async {
@@ -107,6 +108,9 @@ class EmployeeBloc extends BlocBase {
       user = await getUserModel(id: userCredential.user.uid);
       await _saveUserData();
       await isLogged();
+      if(user.available == false) {
+        CustomToast.fail('Seu cadastro ainda está em analise.');
+      }
       if(user.finishTour == false) {
         // Get.offAll(() => TourScreen());
       } else {
@@ -222,6 +226,50 @@ class EmployeeBloc extends BlocBase {
     }
 
   }
+
+  static int getStatusInt(String role) {
+    switch (role) {
+      case 'Gerencia':
+        return 0;
+      case 'Funcionário':
+        return 1;
+      case 'Suporte':
+        return 2;
+      default:
+        return 0;
+    }
+  }
+
+  Future<void> signUpWithEmailPasswordAdminPastor(String email, String password, String name, String role,
+      String id) async {
+    try {
+      _streamController.add(true);
+      UserCredential result = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: email, password: password);
+      int number = getStatusInt(role);
+      Map<String, dynamic> data = {
+        "available": false,
+        "company_id": id,
+        "email": result.user.email,
+        "finish_tour": false,
+        "name": name,
+        "role": number,
+      };
+      await _fireStore.collection('users').doc(result.user.uid).set(data);
+      _streamController.add(false);
+      CustomToast.success('Funcionário Adicionado');
+    } on FirebaseAuthException catch (e) {
+      _streamController.add(false);
+      var error = getErrorString(e.code);
+      if (e.code != null) {
+        CustomToast.fail(error);
+      } else {
+        CustomToast.fail('Error ao tentar criar, se o erro continuar entre em contato com nosso time.');
+      }
+    }
+  }
+
+
 
   @override
   void dispose() {

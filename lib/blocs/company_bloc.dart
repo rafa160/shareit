@@ -18,6 +18,9 @@ class CompanyBloc extends BlocBase {
   Stream get loading => _streamLoadingController.stream;
   Sink get loadingSink => _streamLoadingController.sink;
 
+  String id;
+
+
   Future<void> createCompanyPreOrder(CompanyModel companyModel) async {
     _streamLoadingController.add(true);
     if(companyModel != null) {
@@ -25,7 +28,9 @@ class CompanyBloc extends BlocBase {
       companyModel.planModel = PlanModel.fromJson(_planModel.toMap());
       companyModel.available = true;
       await _emailHelper.sendMessageToCompanyPlanZero(companyModel.planModel.name, companyModel.email, _planModel.employees, companyModel.name);
-      await _fireStore.collection('companies').add(companyModel.toJson());
+      DocumentReference doc_ref = await _fireStore.collection('companies').add(companyModel.toJson());
+      DocumentSnapshot docSnap = await doc_ref.get();
+      id = docSnap.reference.id;
       _streamLoadingController.add(false);
       CustomToast.success('Solicitação enviada com sucesso');
     } else {

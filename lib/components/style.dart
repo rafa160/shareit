@@ -23,9 +23,6 @@ const Color tim = Colors.deepPurple;
 const Color tim2 = Colors.deepPurpleAccent;
 const Color greyColorStronge = Colors.grey;
 const Color standardBackgroundColor = Color(0xff3E5057);
-Color _secondDarkColor = Color(0xFFccccdd);
-Color _accentColor = Color(0xFF8C98A8);
-Color _accentDarkColor = Color(0xFF9999aa);
 
 TextStyle titleForms = GoogleFonts.nunito(
   fontSize: 14,
@@ -92,5 +89,21 @@ TextStyle splashTitle = GoogleFonts.nunito(
 
 TextStyle timeText = GoogleFonts.nunito(
   fontSize: 12,
+  fontWeight: FontWeight.bold,
+);
+
+TextStyle typeText = GoogleFonts.nunito(
+  fontSize: 12,
+  fontWeight: FontWeight.bold,
+);
+
+TextStyle alertDialogTitle = GoogleFonts.nunito(
+  fontSize: 18,
+  fontWeight: FontWeight.bold,
+);
+
+TextStyle alertDialogContent = GoogleFonts.nunito(
+  fontSize: 14,
+  color: greyColor2,
   fontWeight: FontWeight.bold,
 );
