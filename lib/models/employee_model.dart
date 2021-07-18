@@ -37,7 +37,7 @@ class EmployeeModel {
       case EmployeeStatus.manager:
         return 'Gerencia';
       case EmployeeStatus.employee:
-        return 'Funcionario';
+        return 'Funcionário';
       case EmployeeStatus.support:
         return 'Suporte';
       default:

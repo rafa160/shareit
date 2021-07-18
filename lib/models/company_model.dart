@@ -28,6 +28,7 @@ class CompanyModel {
   }
 
   CompanyModel.fromMapping(Map<String, dynamic> map) {
+    id = map['id'];
     name = map['name'];
     personInChargeName = map['person_name'];
     document = map['document'];
@@ -37,7 +38,7 @@ class CompanyModel {
   }
 
   Map<String, dynamic> toJson() => {
-    "id": document,
+    "id": id,
     "name": name,
     "person_name": personInChargeName,
     "document": document,
