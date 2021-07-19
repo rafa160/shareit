@@ -9,6 +9,7 @@ import 'package:share_it/components/custom_button.dart';
 import 'package:share_it/components/custom_color_circular_progress_indicator.dart';
 import 'package:share_it/components/custom_form_builder.dart';
 import 'package:share_it/components/style.dart';
+import 'package:share_it/helpers/strings.dart';
 import 'package:share_it/models/employee_model.dart';
 
 class EditProfileScreen extends StatefulWidget {
@@ -31,7 +32,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       key: _formKey,
       child: Scaffold(
         appBar: AppBar(
-          title: Text('meus dados', style: appBarTitle,),
+          title: Text(Strings.APPBAR_TITLE_MY_INFO, style: appBarTitle,),
           leading: IconButton(
             onPressed: () {
               Get.back();
@@ -52,7 +53,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     height: 20,
                   ),
                   Text(
-                    'nome',
+                    Strings.NAME_HINT,
                     style: textPlanCard,
                   ),
                   SizedBox(
@@ -73,7 +74,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     height: 20,
                   ),
                   Text(
-                    'email',
+                    Strings.EMAIL_HINT,
                     style: textPlanCard,
                   ),
                   SizedBox(
@@ -99,7 +100,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               builder: (context, snapshot) {
                 if(snapshot.data != true) {
                   return CustomButton(
-                      widget: Text('atualizar', style: buttonColors,),
+                      widget: Text(Strings.UPDATE_HINT_BTN, style: buttonColors,),
                       onPressed: () async {
                         FocusScope.of(context).unfocus();
                         if(_formKey.currentState.validate()){

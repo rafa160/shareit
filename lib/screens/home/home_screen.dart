@@ -11,6 +11,7 @@ import 'package:share_it/components/custom_circular_progress_indicator.dart';
 import 'package:share_it/components/custom_color_circular_progress_indicator.dart';
 import 'package:share_it/components/custom_named_icon.dart';
 import 'package:share_it/components/style.dart';
+import 'package:share_it/helpers/strings.dart';
 import 'package:share_it/models/called_model.dart';
 import 'package:share_it/models/employee_model.dart';
 import 'package:share_it/screens/called_details/called_details_module.dart';
@@ -107,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               default:
                             }
                             return NamedIcon(
-                              text: 'hoje',
+                              text: Strings.NAMED_TODAY_ICON,
                               icon: FaIcon(
                                 FontAwesomeIcons.calendarTimes,
                                 size: 30,
@@ -131,7 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               default:
                             }
                             return NamedIcon(
-                              text: 'ontem',
+                              text: Strings.NAMED_YESTERDAY_ICON,
                               icon: FaIcon(
                                 FontAwesomeIcons.calendarWeek,
                                 size: 30,
@@ -155,7 +156,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               default:
                             }
                             return NamedIcon(
-                              text: 'mês',
+                              text: Strings.NAMED_MONTH,
                               icon: FaIcon(
                                 FontAwesomeIcons.calendarAlt,
                                 size: 30,
@@ -191,7 +192,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   return Padding(
                     padding: const EdgeInsets.only(left: 20, right: 20),
                     child: Text(
-                        'Chamados em aberto do dia $dateString',
+                        '${Strings.CALLED_OPEN_MESSAGE} $dateString',
                       style: dayTitle,
                     ),
                   );

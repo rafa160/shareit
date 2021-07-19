@@ -7,6 +7,7 @@ import 'package:share_it/blocs/employee_bloc.dart';
 import 'package:share_it/components/custom_called_card.dart';
 import 'package:share_it/components/custom_circular_progress_indicator.dart';
 import 'package:share_it/components/style.dart';
+import 'package:share_it/helpers/strings.dart';
 import 'package:share_it/models/called_model.dart';
 import 'package:share_it/screens/my_calleds/my_called_module.dart';
 
@@ -35,10 +36,10 @@ class _MyCalledScreenState extends State<MyCalledScreen> {
               children: [
                 widget.employeeBloc.user.status.index != 1 ? Padding(
                     padding: const EdgeInsets.only(left: 20, right: 20),
-                    child: Text('Todos os chamados cadastrados', style: homeMessage,),
+                    child: Text(Strings.APPBAR_TITLE_MY_CALLED_SUPPORT, style: homeMessage,),
                 ) : Padding(
                   padding: const EdgeInsets.only(left: 20, right: 20),
-                  child: Text('Todos os seus chamados', style: homeMessage,),
+                  child: Text(Strings.APPBAR_TITLE_MY_CALLED, style: homeMessage,),
                 ),
                 FutureBuilder(
                   future: calledBloc.getCalledModelList(employeeBloc: widget.employeeBloc),

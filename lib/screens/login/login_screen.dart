@@ -10,6 +10,7 @@ import 'package:share_it/components/custom_color_circular_progress_indicator.dar
 import 'package:share_it/components/custom_form_builder.dart';
 import 'package:share_it/components/logo_container.dart';
 import 'package:share_it/components/style.dart';
+import 'package:share_it/helpers/strings.dart';
 import 'package:share_it/screens/login/login_module.dart';
 import 'package:share_it/screens/request_access/request_access_module.dart';
 import 'package:share_it/screens/reset_password/reset_password_module.dart';
@@ -39,7 +40,6 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
                 // mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  /// colocar logo posteriormente
                   SizedBox(
                     height: 20,
                   ),
@@ -55,7 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   CustomFormBuilderNoBorder(
                     text: 'email',
                     initialValue: '',
-                    hint: 'email',
+                    hint: Strings.EMAIL_HINT,
                     enabled: true,
                     action: TextInputAction.next,
                     type: TextInputType.emailAddress,
@@ -71,7 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   CustomFormBuilderNoBorder(
                     text: 'password',
                     initialValue: '',
-                    hint: 'senha',
+                    hint: Strings.PASSWORD_HINT,
                     enabled: true,
                     action: TextInputAction.send,
                     type: TextInputType.text,
@@ -91,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Get.to(() => ResetPasswordModule());
                         },
                           child: Text(
-                        'esqueceu sua senha?',
+                        Strings.FORGET_PASSWORD,
                         style: titleForms,
                       )),
                     ],
@@ -107,7 +107,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       return Padding(
                         padding: EdgeInsets.only(bottom: bottom),
                         child: CustomButton(
-                          widget: Text('entrar', style: buttonColors,),
+                          widget: Text(Strings.LOGIN, style: buttonColors,),
                           onPressed: () async {
                             FocusScope.of(context).requestFocus(new FocusNode());
                             if (_formKey.currentState.validate()) {
@@ -136,7 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       onTap: () {
                         Get.to(() => RequestAccessModule());
                       },
-                        child: Text('gostaria de solicitar o serviço',style: titleForms)),
+                        child: Text(Strings.ORDER_SERVICE_BTN,style: titleForms)),
                   ),
                 ],
               ),

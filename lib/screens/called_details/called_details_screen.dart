@@ -12,6 +12,7 @@ import 'package:share_it/components/custom_color_circular_progress_indicator.dar
 import 'package:share_it/components/custom_form_builder.dart';
 import 'package:share_it/components/date_card_info.dart';
 import 'package:share_it/components/style.dart';
+import 'package:share_it/helpers/strings.dart';
 import 'package:share_it/helpers/utils.dart';
 import 'package:share_it/models/called_model.dart';
 import 'package:share_it/models/category_model.dart';
@@ -49,7 +50,7 @@ class _CalledDetailsScreenState extends State<CalledDetailsScreen> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          'detalhes do chamado',
+          Strings.APPBAR_TITLE_DETAILS,
           style: textPlanCard,
         ),
         leading: IconButton(
@@ -153,7 +154,7 @@ class _CalledDetailsScreenState extends State<CalledDetailsScreen> {
           builder: (context, snapshot) {
             if (snapshot.data != true) {
               return CustomButton(
-                widget: Text('encerrar chamado', style: buttonColors,),
+                widget: Text(Strings.BUTTON_TEXT_DETAILS, style: buttonColors,),
                 onPressed: () async {
                   if (_formKey.currentState.validate()) {
                     _formKey.currentState.save();

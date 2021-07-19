@@ -12,6 +12,7 @@ import 'package:share_it/components/custom_list_tile.dart';
 import 'package:share_it/components/custom_logout_bottom_sheet.dart';
 import 'package:share_it/components/profile_header.dart';
 import 'package:share_it/components/style.dart';
+import 'package:share_it/helpers/strings.dart';
 import 'package:share_it/models/employee_model.dart';
 import 'package:share_it/screens/login/login_module.dart';
 import 'package:share_it/screens/profile/contract/contract_module.dart';
@@ -88,8 +89,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 height: 40,
               ),
               CustomListTile(
-                title: 'meus dados',
-                subTitle: 'visualize suas informações',
+                title: Strings.APPBAR_TITLE_MY_INFO,
+                subTitle: Strings.SUB_INFO_HINT,
                 icon: FaIcon(
                   FontAwesomeIcons.cog
                 ),
@@ -102,8 +103,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: Divider(),
               ),
               CustomListTile(
-                title: 'meus contratos',
-                subTitle: 'contratos e pendências de assinatura',
+                title: Strings.APPBAR_TITLE_CONTRACT,
+                subTitle: Strings.SUB_CONTRACT_HINT,
                 icon: FaIcon(
                     FontAwesomeIcons.file
                 ),
@@ -122,8 +123,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       context: context,
                       builder: (builder) {
                         return CustomModalBottomSheet(
-                          title: 'Gostaria de sair?',
-                          actionButtonTitle: 'logout',
+                          title: Strings.LEAVE_TITLE_QUESTION,
+                          actionButtonTitle: Strings.LOGOUT_BTN_HINT,
                           onPressed: () async {
                             await employeeBloc.signOut();
                             await Get.offAll(() => LoginModule());
@@ -136,7 +137,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   padding: EdgeInsets.only(left: 20, right: 20),
                   child: ListTile(
                     leading: Icon(FontAwesomeIcons.signOutAlt, color: redColor, size: 20,),
-                    title: Text('sair',style: textPlanCard),
+                    title: Text(Strings.LEAVE_HINT,style: textPlanCard),
                   ),
                 ),
               ),
@@ -152,7 +153,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 stream: versionBloc.streamVersion$,
                  builder: (context, snapshot) {
                    return Text(
-                     "versão: ${snapshot.data}", style: subtitleProfileHeader,
+                     "${Strings.VERSION} ${snapshot.data}", style: subtitleProfileHeader,
                    );
                  }
               ),

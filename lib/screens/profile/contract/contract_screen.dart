@@ -5,6 +5,7 @@ import 'package:share_it/blocs/company_bloc.dart';
 import 'package:share_it/components/custom_circular_progress_indicator.dart';
 import 'package:share_it/components/custom_plan_card.dart';
 import 'package:share_it/components/style.dart';
+import 'package:share_it/helpers/strings.dart';
 import 'package:share_it/models/company_model.dart';
 import 'package:share_it/screens/profile/contract/contract_module.dart';
 
@@ -25,7 +26,7 @@ class _ContractScreenState extends State<ContractScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'meu contrato',
+          Strings.APPBAR_TITLE_CONTRACT,
           style: appBarTitle,
         ),
         leading: IconButton(
@@ -62,7 +63,7 @@ class _ContractScreenState extends State<ContractScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'responsavel pelo seu contrato é ${companyModel.name}',
+                          '${Strings.CONTRACT_OWNER} ${companyModel.name}',
                           style: textPlanCard,
                         ),
                         Divider(),
@@ -72,7 +73,7 @@ class _ContractScreenState extends State<ContractScreen> {
                         Row(
                           children: [
                             Text(
-                              'cnpj ou cpf: ',
+                              Strings.DOC_HINT,
                               style: textPlanCard,
                             ),
                             SizedBox(
@@ -91,7 +92,7 @@ class _ContractScreenState extends State<ContractScreen> {
                         Row(
                           children: [
                             Text(
-                              'e-mail: ',
+                              Strings.EMAIL_HINT_TWO,
                               style: textPlanCard,
                             ),
                             SizedBox(
@@ -104,20 +105,20 @@ class _ContractScreenState extends State<ContractScreen> {
                           ],
                         ),
                         Divider(),
-                        SizedBox(
-                          height: 40,
-                        ),
-                        Center(child: Text('informações do plano'.toUpperCase(), style: appBarTitle,)),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Center(
-                          child: CustomPlanCard(
-                            title: companyModel.planModel.name,
-                            subTitle: companyModel.planModel.value,
-                            text: '',
-                          ),
-                        ),
+                        // SizedBox(
+                        //   height: 40,
+                        // ),
+                        // Center(child: Text(Strings.PLAN_INFO.toUpperCase(), style: appBarTitle,)),
+                        // SizedBox(
+                        //   height: 20,
+                        // ),
+                        // Center(
+                        //   child: CustomPlanCard(
+                        //     title: companyModel.planModel.name,
+                        //     subTitle: companyModel.planModel.value,
+                        //     text: '',
+                        //   ),
+                        // ),
                       ],
                     ),
                   );

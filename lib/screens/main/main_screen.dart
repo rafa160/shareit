@@ -7,6 +7,7 @@ import 'package:share_it/app_module.dart';
 import 'package:share_it/blocs/employee_bloc.dart';
 import 'package:share_it/components/custom_icon_button.dart';
 import 'package:share_it/components/custom_rounded_button.dart';
+import 'package:share_it/helpers/strings.dart';
 import 'package:share_it/screens/home/home_module.dart';
 import 'package:share_it/screens/info/bloc/info_bloc.dart';
 import 'package:share_it/screens/info/info_module.dart';
@@ -81,7 +82,7 @@ class _MainScreenState extends State<MainScreen> {
                   onTap: () {
                     _pageController.jumpToPage(0);
                   },
-                  text: 'home',
+                  text: Strings.MAIN_HOME_HINT,
                   color: _page == 0 ? Theme.of(context).accentColor : Colors.black,
                 ),
                 CustomIconButton(
@@ -94,7 +95,7 @@ class _MainScreenState extends State<MainScreen> {
                   onTap: () {
                     _pageController.jumpToPage(1);
                   },
-                  text: 'chamados',
+                  text: Strings.MAIN_CALLED_HINT,
                   color: _page == 1 ? Theme.of(context).accentColor : Colors.black,
                 ),
                 SizedBox(width: 30),
@@ -108,7 +109,7 @@ class _MainScreenState extends State<MainScreen> {
                   onTap: () {
                     _pageController.jumpToPage(3);
                   },
-                  text: 'info',
+                  text: Strings.MAIN_INFO_HINT,
                   color: _page == 3 ? Theme.of(context).accentColor : Colors.black,
                 ),
                 CustomIconButton(
@@ -121,7 +122,7 @@ class _MainScreenState extends State<MainScreen> {
                   onTap: () {
                     _pageController.jumpToPage(4);
                   },
-                  text: 'perfil',
+                  text: Strings.MAIN_PROFILE_HINT,
                   color: _page == 4 ? Theme.of(context).accentColor : Colors.black,
                 ),
                 SizedBox(width: 0.3),

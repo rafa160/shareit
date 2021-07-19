@@ -13,6 +13,7 @@ import 'package:share_it/components/custom_expansion_tile_card.dart';
 import 'package:share_it/components/custom_form_builder.dart';
 import 'package:share_it/components/custom_form_builder_dropdown.dart';
 import 'package:share_it/components/style.dart';
+import 'package:share_it/helpers/strings.dart';
 import 'package:share_it/models/called_model.dart';
 import 'package:share_it/models/category_model.dart';
 import 'package:share_it/models/company_model.dart';
@@ -71,18 +72,18 @@ class _NewCalledScreenState extends State<NewCalledScreen> {
                 SizedBox(
                   height: 60,
                 ),
-                Text('Inicie seu chamado para a área de Suporte', style: homeMessage,),
+                Text(Strings.TITLE_NEW_CALLED_HINT, style: homeMessage,),
                 SizedBox(
                   height: 40,
                 ),
-                Text('qual o assunto do seu pedido?', style: textPlanCard,),
+                Text(Strings.SUBJECT_STRING, style: textPlanCard,),
                 SizedBox(
                   height: 5,
                 ),
                 CustomFormBuilderNoBorder(
                   text: 'subject',
                   initialValue: '',
-                  hint: 'assunto',
+                  hint: Strings.SUBJECT_HINT,
                   enabled: true,
                   action: TextInputAction.done,
                   type: TextInputType.text,
@@ -94,7 +95,7 @@ class _NewCalledScreenState extends State<NewCalledScreen> {
                 SizedBox(
                   height: 20,
                 ),
-                Text('nome do solicitante', style: textPlanCard,),
+                Text(Strings.EMPLOYEE_TITLE_HINT, style: textPlanCard,),
                 SizedBox(
                   height: 5,
                 ),
@@ -112,7 +113,7 @@ class _NewCalledScreenState extends State<NewCalledScreen> {
                 SizedBox(
                   height: 20,
                 ),
-                Text('e-mail do solicitante', style: textPlanCard,),
+                Text(Strings.EMPLOYEE_EMAIL_HINT, style: textPlanCard,),
                 SizedBox(
                   height: 5,
                 ),
@@ -125,7 +126,7 @@ class _NewCalledScreenState extends State<NewCalledScreen> {
                 SizedBox(
                   height: 20,
                 ),
-                Text('categoria', style: textPlanCard,),
+                Text(Strings.CATEGORY_HINT, style: textPlanCard,),
                 SizedBox(
                   height: 5,
                 ),
@@ -172,7 +173,7 @@ class _NewCalledScreenState extends State<NewCalledScreen> {
           builder: (context, snapshot) {
             if (snapshot.data != true) {
               return CustomButton(
-                widget: Text('criar chamado', style: buttonColors,),
+                widget: Text(Strings.NEW_CALLED_BTN, style: buttonColors,),
                 onPressed: () async {
                   if (_formKey.currentState.validate()) {
                     _formKey.currentState.save();
