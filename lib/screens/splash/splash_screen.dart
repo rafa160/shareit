@@ -7,6 +7,7 @@ import 'package:share_it/components/style.dart';
 import 'package:share_it/models/employee_model.dart';
 import 'package:share_it/screens/login/login_module.dart';
 import 'package:share_it/screens/main/main_module.dart';
+import 'package:share_it/screens/tour/tour_module.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -31,9 +32,9 @@ class _SplashScreenState extends State<SplashScreen> {
       if(await employeeBloc.isLogged() && tourEmployee.finishTour == true && tourEmployee.available == true) {
         await Get.offAll(() => MainModule());
       }
-      // else if (await employeeBloc.isLogged() && tourEmployee.finishTour == false) {
-      //   await Get.offAll(() => TourScreen());
-      // }
+      else if (await employeeBloc.isLogged() && tourEmployee.available == true && tourEmployee.finishTour == false) {
+        await Get.offAll(() => TourModule());
+      }
       else {
         await Get.offAll(() => LoginModule());
       }
