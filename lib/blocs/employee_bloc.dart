@@ -13,6 +13,7 @@ import 'package:share_it/models/company_model.dart';
 import 'package:share_it/models/employee_model.dart';
 import 'package:share_it/screens/login/login_module.dart';
 import 'package:share_it/screens/main/main_module.dart';
+import 'package:share_it/screens/tour/tour_module.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class EmployeeBloc extends BlocBase {
@@ -112,7 +113,7 @@ class EmployeeBloc extends BlocBase {
         CustomToast.fail('Seu cadastro ainda está em analise.');
       }
       if(user.finishTour == false) {
-        // Get.offAll(() => TourScreen());
+        Get.offAll(() => TourModule());
       } else {
         Get.offAll(() => MainModule());
       }
@@ -269,7 +270,25 @@ class EmployeeBloc extends BlocBase {
     }
   }
 
+  Future<void> update(EmployeeBloc employeeBloc) async {
+    try {
+      _streamController.add(true);
+      EmployeeModel updateUserTour = await getUserModel(id: employeeBloc.user.id);
+      updateUserTour.finishTour = true;
+      Map<String, dynamic> userData = {
+        "finish_tour": updateUserTour.finishTour,
+      };
+      DocumentReference ref =
+      _fireStore.collection('users').doc(updateUserTour.id);
+      ref.update(userData);
+      await Get.offAll(() => MainModule());
+      _streamController.add(false);
+    } catch (e) {
+      _streamController.add(false);
+      CustomToast.fail('Erro ao tentar logar');
+    }
 
+  }
 
   @override
   void dispose() {
