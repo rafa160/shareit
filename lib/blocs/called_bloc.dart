@@ -4,6 +4,7 @@ import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:share_it/blocs/employee_bloc.dart';
 import 'package:share_it/components/custom_toast.dart';
+import 'package:share_it/helpers/email_helper.dart';
 import 'package:share_it/models/called_model.dart';
 import 'package:share_it/models/employee_model.dart';
 
@@ -14,11 +15,14 @@ class CalledBloc extends BlocBase {
   Sink get loadingSink => _streamLoadingController.sink;
 
   List<CalledModel> myCalledItems = [];
+  List<dynamic> supportList = [];
+
+  EmailHelper _emailHelper = new EmailHelper();
 
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
 
   Future<void> createCalledRequest(
-      {CalledModel calledModel, EmployeeModel employeeModel}) async {
+      {CalledModel calledModel, EmployeeModel employeeModel, List<EmployeeModel> employeeSupportList}) async {
     try {
       var day = DateTime.now();
       _streamLoadingController.add(true);
@@ -37,7 +41,11 @@ class CalledBloc extends BlocBase {
         'comment': calledModel.comment,
         'employee_id': employeeModel.id
       };
+      employeeSupportList.forEach((element) {
+        supportList.add(element.email);
+      });
       await _fireStore.collection('called_requests').add(data);
+      await _emailHelper.sendEmailToSupport(supportList, employeeModel, calledModel, day);
       _streamLoadingController.add(false);
       CustomToast.success('Chamado criado com sucesso');
     } catch (e) {

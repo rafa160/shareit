@@ -290,6 +290,17 @@ class EmployeeBloc extends BlocBase {
 
   }
 
+  Future<List<EmployeeModel>> getSupportEmployeeList(
+      EmployeeBloc employeeBloc) async {
+    List<EmployeeModel> list = [];
+    final QuerySnapshot snapshot = await _fireStore
+        .collection('users')
+        .where('company_id', isEqualTo: employeeBloc.user.companyId)
+        .get();
+    list = snapshot.docs.map((e) => EmployeeModel.fromDocument(e)).toList();
+    return list;
+  }
+
   @override
   void dispose() {
     _user$.close();

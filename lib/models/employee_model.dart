@@ -55,6 +55,10 @@ class EmployeeModel {
     companyId = json['company_id'];
   }
 
+  Map<String, dynamic> toJson() => {
+    "email": email,
+  };
+
   @override
   String toString() {
     return 'EmployeeModel{id: $id, name: $name, email: $email, available: $available, finishTour: $finishTour, companyId: $companyId, status: $status}';
