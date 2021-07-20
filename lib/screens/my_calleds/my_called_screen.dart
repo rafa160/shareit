@@ -83,6 +83,7 @@ class _MyCalledScreenState extends State<MyCalledScreen> {
                                 child: CustomCalledCardImage(
                                   title: item.employeeEmail,
                                   image: image,
+                                  topic: item.subject,
                                   created: item.calledCreatedTime,
                                   finished: item.calledFinishedTime,
                                 ),

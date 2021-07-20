@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:share_it/components/custom_cached_image.dart';
+import 'package:share_it/components/custom_sub_text_field.dart';
 import 'package:share_it/components/date_card_info.dart';
 import 'package:share_it/components/product_main_info_card.dart';
 
@@ -9,10 +10,11 @@ class CustomCalledCardImage extends StatelessWidget {
   final String image;
   final String title;
   final String sub;
+  final String topic;
   final DateTime created;
   final DateTime finished;
 
-  const CustomCalledCardImage({Key key, this.image, this.created, this.finished, this.title, this.sub}) : super(key: key);
+  const CustomCalledCardImage({Key key, this.image, this.created, this.finished, this.title, this.sub, this.topic}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +49,14 @@ class CustomCalledCardImage extends StatelessWidget {
               ),
               title: title,
         )),
+        Positioned(
+          top: 60,
+          left: 25,
+          right: 15,
+          child: CustomSubTextField(
+            sub: topic,
+          ),
+        ),
         Positioned(
             bottom: 20,
             left: 20,

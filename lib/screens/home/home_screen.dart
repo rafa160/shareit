@@ -235,6 +235,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             },
                             child: CustomCalledCardImage(
                               title: item.employeeEmail,
+                              topic: item.subject,
                               image: image,
                               created: item.calledCreatedTime,
                               finished: item.calledFinishedTime,

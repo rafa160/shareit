@@ -86,6 +86,7 @@ class _NewCalledScreenState extends State<NewCalledScreen> {
                   hint: Strings.SUBJECT_HINT,
                   enabled: true,
                   action: TextInputAction.done,
+                  maxLength: 88,
                   type: TextInputType.text,
                   validator: FormBuilderValidators.compose([
                     FormBuilderValidators.required(context),

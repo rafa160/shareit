@@ -51,6 +51,7 @@ dependencies:
   intl: ^0.17.0
   fl_chart: ^0.36.2
   cached_network_image: ^3.0.0
+  bubble: ^1.2.1
 
 dev_dependencies:
   flutter_test:

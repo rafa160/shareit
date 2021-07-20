@@ -17,7 +17,7 @@ class ProductNameCard extends StatelessWidget {
         maxHeight: double.infinity,
       ),
       decoration: BoxDecoration(
-          color: Colors.blue,
+          color: Colors.blue[100],
           borderRadius: BorderRadius.all(Radius.circular(15))),
       child: Padding(
         padding:
