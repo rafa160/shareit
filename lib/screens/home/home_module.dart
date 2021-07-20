@@ -6,7 +6,7 @@ import 'package:share_it/screens/home/home_screen.dart';
 class HomeModule extends ModuleWidget {
   @override
   List<Bloc> get blocs => [
-    Bloc((i) => HomeBloc())
+    Bloc((i) => HomeBloc()),
   ];
 
   @override

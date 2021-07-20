@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:share_it/blocs/employee_bloc.dart';
 import 'package:share_it/models/called_model.dart';
+import 'package:share_it/models/image_model.dart';
 
 class HomeBloc extends BlocBase {
 
@@ -27,10 +28,12 @@ class HomeBloc extends BlocBase {
   List<CalledModel> todayCalledItems = [];
   List<CalledModel> yesterdayCalledItems = [];
   List<CalledModel> monthCalledList = [];
+  ImageModel image;
 
   HomeBloc() {
     getTodayDateTime();
     getYesterdayDateTime();
+    getImage();
   }
 
   Future<DateTime> getTodayDateTime() async {
@@ -113,6 +116,13 @@ class HomeBloc extends BlocBase {
       }
     });
     return monthCalledList;
+  }
+
+  Future<String> getImage() async {
+    final DocumentSnapshot snapshot =
+        await _firebaseInstance.collection('image').doc('mMlUkARahcwub1ZzlQ5g').get();
+    image = ImageModel.fromDocument(snapshot);
+    return image.image;
   }
 
   @override

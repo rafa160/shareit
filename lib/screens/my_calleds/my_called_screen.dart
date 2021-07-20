@@ -5,10 +5,13 @@ import 'package:share_it/blocs/called_bloc.dart';
 import 'package:share_it/blocs/employee_bloc.dart';
 
 import 'package:share_it/components/custom_called_card.dart';
+import 'package:share_it/components/custom_called_card_image.dart';
 import 'package:share_it/components/custom_circular_progress_indicator.dart';
 import 'package:share_it/components/style.dart';
 import 'package:share_it/helpers/strings.dart';
 import 'package:share_it/models/called_model.dart';
+import 'package:share_it/screens/home/bloc/home_bloc.dart';
+import 'package:share_it/screens/home/home_module.dart';
 import 'package:share_it/screens/my_calleds/my_called_module.dart';
 
 class MyCalledScreen extends StatefulWidget {
@@ -23,6 +26,19 @@ class _MyCalledScreenState extends State<MyCalledScreen> {
 
   List<CalledModel> myList = [];
   var calledBloc = MyCalledModule.to.getBloc<CalledBloc>();
+  var homeBloc = AppModule.to.getBloc<HomeBloc>();
+ String image;
+
+  Future getImage() async {
+    image = await homeBloc.getImage();
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getImage();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,11 +80,11 @@ class _MyCalledScreenState extends State<MyCalledScreen> {
                               padding: const EdgeInsets.only(left: 20, right: 20),
                               child: GestureDetector(
                                 onTap:  (){},
-                                child: CustomCalledCard(
-                                  email: item.employeeEmail,
-                                  subject: item.subject,
-                                  createdDate: dateCreatedString,
-                                  finishedDate: dateFinishedString,
+                                child: CustomCalledCardImage(
+                                  title: item.employeeEmail,
+                                  image: image,
+                                  created: item.calledCreatedTime,
+                                  finished: item.calledFinishedTime,
                                 ),
                               ),
                             );

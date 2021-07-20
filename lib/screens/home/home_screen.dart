@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:share_it/app_module.dart';
 import 'package:share_it/blocs/employee_bloc.dart';
 import 'package:share_it/components/custom_called_card.dart';
+import 'package:share_it/components/custom_called_card_image.dart';
 import 'package:share_it/components/custom_circular_progress_indicator.dart';
 import 'package:share_it/components/custom_color_circular_progress_indicator.dart';
 import 'package:share_it/components/custom_named_icon.dart';
@@ -25,10 +26,11 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   var employeeBloc = AppModule.to.getBloc<EmployeeBloc>();
-  var homeBloc = HomeModule.to.getBloc<HomeBloc>();
+  var homeBloc = AppModule.to.getBloc<HomeBloc>();
   List<CalledModel> todayListNumber = [];
   List<CalledModel> yesterdayListNumber = [];
   List<CalledModel> monthList = [];
+  String image;
 
   @override
   void initState() {
@@ -39,6 +41,11 @@ class _HomeScreenState extends State<HomeScreen> {
     homeBloc.getCalledItems(employeeBloc);
     homeBloc.getYesterdayCalledItems(employeeBloc);
     homeBloc.getMonthCalledList(employeeBloc);
+    getImage();
+  }
+
+  Future getImage() async {
+    image = await homeBloc.getImage();
   }
 
   @override
@@ -226,12 +233,18 @@ class _HomeScreenState extends State<HomeScreen> {
                             } : (){
 
                             },
-                            child: CustomCalledCard(
-                              email: item.employeeEmail,
-                              subject: item.subject,
-                              createdDate: dateCreatedString,
-                              finishedDate: dateFinishedString,
+                            child: CustomCalledCardImage(
+                              title: item.employeeEmail,
+                              image: image,
+                              created: item.calledCreatedTime,
+                              finished: item.calledFinishedTime,
                             ),
+                            // CustomCalledCard(
+                            //   email: item.employeeEmail,
+                            //   subject: item.subject,
+                            //   createdDate: dateCreatedString,
+                            //   finishedDate: dateFinishedString,
+                            // ),
                           ),
                         );
                       }
