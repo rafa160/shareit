@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:share_it/app_module.dart';
 import 'package:share_it/blocs/called_bloc.dart';
@@ -12,6 +13,7 @@ import 'package:share_it/helpers/strings.dart';
 import 'package:share_it/models/called_model.dart';
 import 'package:share_it/screens/home/bloc/home_bloc.dart';
 import 'package:share_it/screens/home/home_module.dart';
+import 'package:share_it/screens/my_called_details_only_read/my_called_details_only_read_module.dart';
 import 'package:share_it/screens/my_calleds/my_called_module.dart';
 
 class MyCalledScreen extends StatefulWidget {
@@ -79,7 +81,9 @@ class _MyCalledScreenState extends State<MyCalledScreen> {
                             return Padding(
                               padding: const EdgeInsets.only(left: 20, right: 20),
                               child: GestureDetector(
-                                onTap:  (){},
+                                onTap:  () async {
+                                  Get.to(() => MyCalledDetailsOnlyReadModule(item));
+                                },
                                 child:
                                 CustomCalledCard(
                                   email: item.employeeEmail,

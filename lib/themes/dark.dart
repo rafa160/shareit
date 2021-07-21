@@ -8,10 +8,11 @@ class ThemeDark {
   static Color green = Colors.green;
   static Color grey = Colors.grey;
   static Color red1 = Color(0xffC43131);
+  static Color black = Colors.black;
 
   static AppBarTheme createAppBarTheme() {
     return AppBarTheme(
-        color: background,
+        color: black,
         brightness: Brightness.dark,
         centerTitle: true,
         elevation: 0,
@@ -34,14 +35,14 @@ class ThemeDark {
   static ThemeData themeDark = new ThemeData(
     brightness: Brightness.dark,
     appBarTheme: createAppBarTheme(),
-    backgroundColor: background,
+    backgroundColor: black,
     dividerColor: white,
     errorColor: red1,
     primaryColor: Colors.blue,
     accentColor: Colors.blue,
-    primaryColorLight: background,
+    primaryColorLight: black,
     primaryColorDark: white,
-    scaffoldBackgroundColor: background,
+    scaffoldBackgroundColor: black,
     cardTheme: createCardTheme(),
     iconTheme: IconThemeData(
       color: Colors.blue,
@@ -49,7 +50,7 @@ class ThemeDark {
       size: 24,
     ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: background
+      backgroundColor: black
     ),
   );
 }

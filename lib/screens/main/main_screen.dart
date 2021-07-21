@@ -7,6 +7,7 @@ import 'package:share_it/app_module.dart';
 import 'package:share_it/blocs/employee_bloc.dart';
 import 'package:share_it/components/custom_icon_button.dart';
 import 'package:share_it/components/custom_rounded_button.dart';
+import 'package:share_it/components/style.dart';
 import 'package:share_it/helpers/strings.dart';
 import 'package:share_it/screens/home/home_module.dart';
 import 'package:share_it/screens/info/bloc/info_bloc.dart';
@@ -50,6 +51,7 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkTheme = Theme.of(context).brightness == Brightness.dark;
     ScreenUtil.init(context);
     return Scaffold(
         body: PageView(
@@ -64,6 +66,7 @@ class _MainScreenState extends State<MainScreen> {
             ]),
         bottomNavigationBar: BottomAppBar(
           child: Container(
+            color: isDarkTheme != true ? Colors.white : Colors.black,
             height: ScreenUtil.screenHeight * 0.07,
             child: Row(
               mainAxisSize: MainAxisSize.max,
@@ -75,13 +78,13 @@ class _MainScreenState extends State<MainScreen> {
                     FontAwesomeIcons.home,
                     size: 20,
                     color:
-                    _page == 0 ? Theme.of(context).accentColor : Colors.black,
+                    _page == 0 ? Theme.of(context).accentColor : Colors.white,
                   ),
                   onTap: () {
                     _pageController.jumpToPage(0);
                   },
                   text: Strings.MAIN_HOME_HINT,
-                  color: _page == 0 ? Theme.of(context).accentColor : Colors.black,
+                  color: _page == 0 ? Theme.of(context).accentColor :  Colors.white,
                 ),
                 // SizedBox(width: 30),
                 CustomIconButton(
@@ -89,39 +92,39 @@ class _MainScreenState extends State<MainScreen> {
                     FontAwesomeIcons.plus,
                     size: 20,
                     color:
-                    _page == 1 ? Theme.of(context).accentColor : Colors.black,
+                    _page == 1 ? Theme.of(context).accentColor :  Colors.white,
                   ),
                   onTap: () {
                     _pageController.jumpToPage(1);
                   },
                   text: Strings.MAIN_INFO_HINT,
-                  color: _page == 1 ? Theme.of(context).accentColor : Colors.black,
+                  color: _page == 1 ? Theme.of(context).accentColor :  Colors.white,
                 ),
                 CustomIconButton(
                   icon: FaIcon(
                     FontAwesomeIcons.list,
                     size: 20,
                     color:
-                    _page == 2 ? Theme.of(context).accentColor : Colors.black,
+                    _page == 2 ? Theme.of(context).accentColor :  Colors.white,
                   ),
                   onTap: () {
                     _pageController.jumpToPage(2);
                   },
                   text: Strings.MAIN_CALLED_HINT,
-                  color: _page == 2 ? Theme.of(context).accentColor : Colors.black,
+                  color: _page == 2 ? Theme.of(context).accentColor :  Colors.white,
                 ),
                 CustomIconButton(
                   icon: FaIcon(
                     FontAwesomeIcons.userCog,
                     size: 20,
                     color:
-                    _page == 3 ? Theme.of(context).accentColor : Colors.black,
+                    _page == 3 ? Theme.of(context).accentColor :  Colors.white,
                   ),
                   onTap: () {
                     _pageController.jumpToPage(4);
                   },
                   text: Strings.MAIN_PROFILE_HINT,
-                  color: _page == 3 ? Theme.of(context).accentColor : Colors.black,
+                  color: _page == 3 ? Theme.of(context).accentColor :  Colors.white,
                 ),
                 SizedBox(width: 0.3),
               ],

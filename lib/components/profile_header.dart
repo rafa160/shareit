@@ -37,7 +37,7 @@ class ProfileHeader extends StatelessWidget {
           ),
           subtitle: Row(
             children: <Widget>[
-              Icon(Icons.linear_scale, color: Colors.black),
+              FaIcon(FontAwesomeIcons.rulerHorizontal),
               SizedBox(width: 10,),
               Text(email, style: subtitleProfileHeader),
               SizedBox(width: 10,),

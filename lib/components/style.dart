@@ -23,6 +23,7 @@ const Color tim = Colors.deepPurple;
 const Color tim2 = Colors.deepPurpleAccent;
 const Color greyColorStronge = Colors.grey;
 const Color standardBackgroundColor = Color(0xff3E5057);
+const Color background = Color(0xff434343);
 
 TextStyle titleForms = GoogleFonts.nunito(
   fontSize: 14,
