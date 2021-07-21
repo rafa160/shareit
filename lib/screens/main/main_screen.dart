@@ -78,13 +78,13 @@ class _MainScreenState extends State<MainScreen> {
                     FontAwesomeIcons.home,
                     size: 20,
                     color:
-                    _page == 0 ? Theme.of(context).accentColor : Colors.white,
+                    _page == 0 ? Theme.of(context).accentColor : background,
                   ),
                   onTap: () {
                     _pageController.jumpToPage(0);
                   },
                   text: Strings.MAIN_HOME_HINT,
-                  color: _page == 0 ? Theme.of(context).accentColor :  Colors.white,
+                  color: _page == 0 ? Theme.of(context).accentColor :  background,
                 ),
                 // SizedBox(width: 30),
                 CustomIconButton(
@@ -92,39 +92,39 @@ class _MainScreenState extends State<MainScreen> {
                     FontAwesomeIcons.plus,
                     size: 20,
                     color:
-                    _page == 1 ? Theme.of(context).accentColor :  Colors.white,
+                    _page == 1 ? Theme.of(context).accentColor :  background,
                   ),
                   onTap: () {
                     _pageController.jumpToPage(1);
                   },
                   text: Strings.MAIN_INFO_HINT,
-                  color: _page == 1 ? Theme.of(context).accentColor :  Colors.white,
+                  color: _page == 1 ? Theme.of(context).accentColor :  background,
                 ),
                 CustomIconButton(
                   icon: FaIcon(
                     FontAwesomeIcons.list,
                     size: 20,
                     color:
-                    _page == 2 ? Theme.of(context).accentColor :  Colors.white,
+                    _page == 2 ? Theme.of(context).accentColor :  background,
                   ),
                   onTap: () {
                     _pageController.jumpToPage(2);
                   },
                   text: Strings.MAIN_CALLED_HINT,
-                  color: _page == 2 ? Theme.of(context).accentColor :  Colors.white,
+                  color: _page == 2 ? Theme.of(context).accentColor :  background,
                 ),
                 CustomIconButton(
                   icon: FaIcon(
                     FontAwesomeIcons.userCog,
                     size: 20,
                     color:
-                    _page == 3 ? Theme.of(context).accentColor :  Colors.white,
+                    _page == 3 ? Theme.of(context).accentColor :  background,
                   ),
                   onTap: () {
                     _pageController.jumpToPage(4);
                   },
                   text: Strings.MAIN_PROFILE_HINT,
-                  color: _page == 3 ? Theme.of(context).accentColor :  Colors.white,
+                  color: _page == 3 ? Theme.of(context).accentColor :  background,
                 ),
                 SizedBox(width: 0.3),
               ],

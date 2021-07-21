@@ -112,16 +112,17 @@ class _MyCalledDetailsOnlyReadScreenState extends State<MyCalledDetailsOnlyReadS
               SizedBox(
                 height: 20,
               ),
-              CustomFormBuilderNoBorder(
-                text: 'comment',
-                initialValue: '',
-                hint: 'observações',
-                enabled: true,
-                action: TextInputAction.next,
-                type: TextInputType.text,
-                validator: FormBuilderValidators.compose([
-                ]),
-                obscureText: false,
+              Container(
+                width: ScreenUtil.screenWidth,
+                height: 100,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.blue[200]
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(widget.calledModel.comment, style: textPlanCard,),
+                ),
               ),
             ],
           ),
