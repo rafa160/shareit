@@ -21,7 +21,7 @@ class Strings {
   //main screen
   static const MAIN_HOME_HINT = 'home';
   static const MAIN_CALLED_HINT = 'chamados';
-  static const MAIN_INFO_HINT = 'info';
+  static const MAIN_INFO_HINT = 'novo';
   static const MAIN_PROFILE_HINT = 'perfil';
 
   //my_called screen

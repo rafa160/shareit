@@ -25,7 +25,6 @@ class _MainScreenState extends State<MainScreen> {
   int _page = 0;
 
   var employeeBloc = AppModule.to.getBloc<EmployeeBloc>();
-  var infoBloc = AppModule.to.getBloc<InfoBloc>();
 
   @override
   void initState() {
@@ -59,9 +58,8 @@ class _MainScreenState extends State<MainScreen> {
             onPageChanged: onPageChanged,
             children: <Widget>[
               HomeModule(),
-              MyCalledModule(employeeBloc),
               NewCalledModule(employeeBloc.user),
-              InfoModule(),
+              MyCalledModule(employeeBloc),
               ProfileModule(),
             ]),
         bottomNavigationBar: BottomAppBar(
@@ -85,9 +83,10 @@ class _MainScreenState extends State<MainScreen> {
                   text: Strings.MAIN_HOME_HINT,
                   color: _page == 0 ? Theme.of(context).accentColor : Colors.black,
                 ),
+                // SizedBox(width: 30),
                 CustomIconButton(
                   icon: FaIcon(
-                    FontAwesomeIcons.list,
+                    FontAwesomeIcons.plus,
                     size: 20,
                     color:
                     _page == 1 ? Theme.of(context).accentColor : Colors.black,
@@ -95,56 +94,55 @@ class _MainScreenState extends State<MainScreen> {
                   onTap: () {
                     _pageController.jumpToPage(1);
                   },
-                  text: Strings.MAIN_CALLED_HINT,
+                  text: Strings.MAIN_INFO_HINT,
                   color: _page == 1 ? Theme.of(context).accentColor : Colors.black,
                 ),
-                SizedBox(width: 30),
                 CustomIconButton(
                   icon: FaIcon(
-                    FontAwesomeIcons.sitemap,
+                    FontAwesomeIcons.list,
                     size: 20,
                     color:
-                    _page == 3 ? Theme.of(context).accentColor : Colors.black,
+                    _page == 2 ? Theme.of(context).accentColor : Colors.black,
                   ),
                   onTap: () {
-                    _pageController.jumpToPage(3);
+                    _pageController.jumpToPage(2);
                   },
-                  text: Strings.MAIN_INFO_HINT,
-                  color: _page == 3 ? Theme.of(context).accentColor : Colors.black,
+                  text: Strings.MAIN_CALLED_HINT,
+                  color: _page == 2 ? Theme.of(context).accentColor : Colors.black,
                 ),
                 CustomIconButton(
                   icon: FaIcon(
                     FontAwesomeIcons.userCog,
                     size: 20,
                     color:
-                    _page == 4 ? Theme.of(context).accentColor : Colors.black,
+                    _page == 3 ? Theme.of(context).accentColor : Colors.black,
                   ),
                   onTap: () {
                     _pageController.jumpToPage(4);
                   },
                   text: Strings.MAIN_PROFILE_HINT,
-                  color: _page == 4 ? Theme.of(context).accentColor : Colors.black,
+                  color: _page == 3 ? Theme.of(context).accentColor : Colors.black,
                 ),
                 SizedBox(width: 0.3),
               ],
             ),
           ),
         ),
-        floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: Padding(
-          padding: const EdgeInsets.only(top: 24.0, bottom: 5),
-          child:  CustomRoundedButton(
-            icon: FaIcon(
-              FontAwesomeIcons.plus,
-              size: 20,
-              color: _page == 2 ? Theme.of(context).accentColor : Colors.black,
-            ),
-            onPressed: () => _pageController.jumpToPage(2),
-            color: Colors.white,
-            radius: 30,
-          ),
-        )
+        // floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
+        // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        // floatingActionButton: Padding(
+        //   padding: const EdgeInsets.only(top: 24.0, bottom: 5),
+        //   child:  CustomRoundedButton(
+        //     icon: FaIcon(
+        //       FontAwesomeIcons.plus,
+        //       size: 20,
+        //       color: _page == 2 ? Theme.of(context).accentColor : Colors.black,
+        //     ),
+        //     onPressed: () => _pageController.jumpToPage(2),
+        //     color: Colors.white,
+        //     radius: 30,
+        //   ),
+        // )
     );
   }
 }

@@ -16,6 +16,7 @@ class CalledBloc extends BlocBase {
 
   List<CalledModel> myCalledItems = [];
   List<dynamic> supportList = [];
+  List<CalledModel> calledByCatId = [];
 
   EmailHelper _emailHelper = new EmailHelper();
 
@@ -85,6 +86,16 @@ class CalledBloc extends BlocBase {
       myCalledItems = snapshot.docs.map((e) => CalledModel.fromDocument(e)).toList();
       return myCalledItems;
     }
+  }
+
+  Future<List<CalledModel>> getCalledListByCategoryId(
+      {EmployeeModel employeeModel, String id}) async {
+    calledByCatId.clear();
+    final QuerySnapshot snapshot =
+    await _fireStore.collection('called_requests').where('company_id', isEqualTo: employeeModel.companyId).where('category_id', isEqualTo: id).get();
+    calledByCatId =
+        snapshot.docs.map((e) => CalledModel.fromDocument(e)).toList();
+    return calledByCatId;
   }
 
   @override

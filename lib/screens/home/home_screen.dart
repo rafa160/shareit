@@ -5,16 +5,19 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:share_it/app_module.dart';
+import 'package:share_it/blocs/category_bloc.dart';
 import 'package:share_it/blocs/employee_bloc.dart';
 import 'package:share_it/components/custom_called_card.dart';
-import 'package:share_it/components/custom_called_card_image.dart';
+import 'package:share_it/components/custom_category_card_btn.dart';
 import 'package:share_it/components/custom_circular_progress_indicator.dart';
 import 'package:share_it/components/custom_color_circular_progress_indicator.dart';
 import 'package:share_it/components/custom_named_icon.dart';
 import 'package:share_it/components/style.dart';
 import 'package:share_it/helpers/strings.dart';
 import 'package:share_it/models/called_model.dart';
+import 'package:share_it/models/category_model.dart';
 import 'package:share_it/models/employee_model.dart';
+import 'package:share_it/screens/called_by_category/called_details_info_module.dart';
 import 'package:share_it/screens/called_details/called_details_module.dart';
 import 'package:share_it/screens/home/bloc/home_bloc.dart';
 import 'package:share_it/screens/home/home_module.dart';
@@ -27,6 +30,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   var employeeBloc = AppModule.to.getBloc<EmployeeBloc>();
   var homeBloc = AppModule.to.getBloc<HomeBloc>();
+  var categoryBloc = HomeModule.to.getBloc<CategoryBloc>();
+
   List<CalledModel> todayListNumber = [];
   List<CalledModel> yesterdayListNumber = [];
   List<CalledModel> monthList = [];
@@ -184,6 +189,49 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(
               height: 20,
             ),
+            Padding(
+              padding: const EdgeInsets.only(left: 20, right: 20),
+              child: Text('Categorias',style: dayTitle,),
+            ),
+            Container(
+              height: 120,
+              child: FutureBuilder(
+                future: categoryBloc.getCategories(),
+                builder: (context, snapshot){
+                  switch (snapshot.connectionState) {
+                    case ConnectionState.none:
+                    case ConnectionState.waiting:
+                      return Center(
+                        child: CustomCircularProgressIndicator(),
+                      );
+                    default:
+                  }
+                  return ListView.builder(
+                    itemCount: categoryBloc.categories.length,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (_, index) {
+                      CategoryModel model = snapshot.data[index];
+                      return Center(
+                        child: CustomCategoryCardBtn(
+                          icon: FaIcon(
+                            FontAwesomeIcons.memory,
+                            size: 12,
+                          ),
+                          text: model.name,
+                          onPressed: () async{
+                            await Get.to(() => CalledByCategoryModule(categoryId: model.id,category: model.name,));
+                          },
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
             StreamBuilder(
                 stream: homeBloc.todayDateTime$,
                 builder: (context, snapshot) {
@@ -233,19 +281,20 @@ class _HomeScreenState extends State<HomeScreen> {
                             } : (){
 
                             },
-                            child: CustomCalledCardImage(
-                              title: item.employeeEmail,
-                              topic: item.subject,
-                              image: image,
-                              created: item.calledCreatedTime,
-                              finished: item.calledFinishedTime,
-                            ),
-                            // CustomCalledCard(
-                            //   email: item.employeeEmail,
-                            //   subject: item.subject,
-                            //   createdDate: dateCreatedString,
-                            //   finishedDate: dateFinishedString,
+                            child:
+                            // CustomCalledCardImage(
+                            //   title: item.employeeEmail,
+                            //   topic: item.subject,
+                            //   image: image,
+                            //   created: item.calledCreatedTime,
+                            //   finished: item.calledFinishedTime,
                             // ),
+                            CustomCalledCard(
+                              email: item.employeeEmail,
+                              subject: item.subject,
+                              createdDate: dateCreatedString,
+                              finishedDate: dateFinishedString,
+                            ),
                           ),
                         );
                       }

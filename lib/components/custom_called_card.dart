@@ -1,3 +1,4 @@
+import 'package:bubble/bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:share_it/components/style.dart';
@@ -49,12 +50,18 @@ class CustomCalledCard extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 5, left: 10, right: 10),
                 child: Text('Assunto', style: titleForms,),
               ),
-              SizedBox(
-                height: 10,
-              ),
               Flexible( flex: 3, child: Padding(
                 padding: const EdgeInsets.only(top: 5, left: 10, right: 10),
-                child: Text('  $subject', style: titleForms,),
+                child: Bubble(
+                  margin: BubbleEdges.only(top: 10),
+                  stick: true,
+                  nip: BubbleNip.leftTop,
+                  color: Colors.blue[200],
+                  child: Text(
+                    subject,
+                    style: titleForms,
+                  ),
+                ),
               )),
               SizedBox(
                 height: 10,

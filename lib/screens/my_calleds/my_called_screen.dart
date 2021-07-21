@@ -80,12 +80,12 @@ class _MyCalledScreenState extends State<MyCalledScreen> {
                               padding: const EdgeInsets.only(left: 20, right: 20),
                               child: GestureDetector(
                                 onTap:  (){},
-                                child: CustomCalledCardImage(
-                                  title: item.employeeEmail,
-                                  image: image,
-                                  topic: item.subject,
-                                  created: item.calledCreatedTime,
-                                  finished: item.calledFinishedTime,
+                                child:
+                                CustomCalledCard(
+                                  email: item.employeeEmail,
+                                  subject: item.subject,
+                                  createdDate: dateCreatedString,
+                                  finishedDate: dateFinishedString,
                                 ),
                               ),
                             );
