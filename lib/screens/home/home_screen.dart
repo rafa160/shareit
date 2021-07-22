@@ -1,6 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -55,6 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -194,7 +196,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Text('Categorias',style: dayTitle,),
             ),
             Container(
-              height: 120,
+              height: 110,
               child: FutureBuilder(
                 future: categoryBloc.getCategories(),
                 builder: (context, snapshot){
@@ -282,13 +284,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
                             },
                             child:
-                            // CustomCalledCardImage(
-                            //   title: item.employeeEmail,
-                            //   topic: item.subject,
-                            //   image: image,
-                            //   created: item.calledCreatedTime,
-                            //   finished: item.calledFinishedTime,
-                            // ),
                             CustomCalledCard(
                               email: item.employeeEmail,
                               subject: item.subject,

@@ -16,7 +16,7 @@ class CustomCalledCard extends StatelessWidget {
   Widget build(BuildContext context) {
     ScreenUtil.init(context);
     return Container(
-      height: ScreenUtil.screenHeight * 0.23,
+      height: ScreenUtil.screenHeight * 0.29,
       child: Card(
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -50,22 +50,26 @@ class CustomCalledCard extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 5, left: 10, right: 10),
                 child: Text('Assunto', style: titleForms,),
               ),
-              Flexible( flex: 3, child: Padding(
+            Flexible(
+              flex: 2,
+              fit: FlexFit.tight,
+              child: Padding(
                 padding: const EdgeInsets.only(top: 5, left: 10, right: 10),
-                child: Bubble(
-                  margin: BubbleEdges.only(top: 10),
-                  stick: true,
-                  nip: BubbleNip.leftTop,
-                  color: Colors.blue[200],
-                  child: Text(
-                    subject,
-                    style: titleForms,
+                child: Container(
+                  width: ScreenUtil.screenWidth,
+                  child: Bubble(
+                    // margin: BubbleEdges.only(top: 10),
+                    stick: true,
+                    nip: BubbleNip.leftTop,
+                    color: Colors.blue[200],
+                    child: Text(
+                      subject,
+                      style: titleForms,
+                    ),
                   ),
                 ),
-              )),
-              SizedBox(
-                height: 10,
               ),
+            ),
               Divider(),
               Padding(
                 padding: const EdgeInsets.only(left: 10, right: 10),

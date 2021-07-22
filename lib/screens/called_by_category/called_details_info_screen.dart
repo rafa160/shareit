@@ -11,6 +11,7 @@ import 'package:share_it/components/custom_circular_progress_indicator.dart';
 import 'package:share_it/components/style.dart';
 import 'package:share_it/models/called_model.dart';
 import 'package:share_it/screens/called_by_category/called_details_info_module.dart';
+import 'package:share_it/screens/my_called_details_only_read/my_called_details_only_read_module.dart';
 
 class CalledByCategoryScreen extends StatefulWidget {
   final String categoryId;
@@ -79,7 +80,9 @@ class _CalledByCategoryScreenState extends State<CalledByCategoryScreen> {
                           var dateCreatedString = DateFormat('dd/MM hh:mm').format(item.calledCreatedTime);
                           var dateFinishedString =  item.calledFinishedTime != null ? DateFormat('dd/MM hh:mm').format(item.calledFinishedTime) : '';
                           return GestureDetector(
-                            onTap: () {},
+                            onTap: () async {
+                              await Get.to(() => MyCalledDetailsOnlyReadModule(item));
+                            },
                             child: CustomCalledCard(
                               email: item.employeeEmail,
                               subject: item.subject,

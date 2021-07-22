@@ -1,3 +1,4 @@
+import 'package:bubble/bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_screenutil/screenutil.dart';
@@ -52,44 +53,6 @@ class _MyCalledDetailsOnlyReadScreenState extends State<MyCalledDetailsOnlyReadS
               SizedBox(
                 height: 30,
               ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  DateCardInfo(
-                    date: widget.calledModel.calledCreatedTime,
-                  ),
-                  Spacer(),
-                  DateCardInfo(
-                    date: widget.calledModel.calledFinishedTime,
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                width: ScreenUtil.screenWidth,
-                height: 100,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.blue[200]
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(widget.calledModel.subject, style: textPlanCard,),
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              CustomFormBuilderNoBorder(
-                initialValue: widget.calledModel.employeeName,
-                enabled: false,
-                obscureText: false,
-              ),
-              SizedBox(
-                height: 20,
-              ),
               FutureBuilder(
                   future: categoryBloc.getCategoryById(widget.calledModel.categoryId),
                   builder: (context, snapshot) {
@@ -110,19 +73,69 @@ class _MyCalledDetailsOnlyReadScreenState extends State<MyCalledDetailsOnlyReadS
                   }
               ),
               SizedBox(
-                height: 20,
+                height: 10,
+              ),
+              CustomFormBuilderNoBorder(
+                initialValue: widget.calledModel.employeeName,
+                enabled: false,
+                obscureText: false,
+              ),
+              SizedBox(
+                height: 10,
               ),
               Container(
                 width: ScreenUtil.screenWidth,
                 height: 100,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.blue[200]
+                child: Bubble(
+                  stick: true,
+                  nip: BubbleNip.leftTop,
+                  color: Colors.blue[200],
+                  child: Text(
+                    widget.calledModel.subject,
+                    style: textPlanCard,
+                  ),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(widget.calledModel.comment, style: textPlanCard,),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Row(
+               mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  DateCardInfo(
+                    date: widget.calledModel.calledCreatedTime,
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                width: ScreenUtil.screenWidth,
+                height: 100,
+                child:Bubble(
+                  stick: true,
+                  nip: BubbleNip.rightTop,
+                  color: Colors.greenAccent,
+                  child:  widget.calledModel.comment != '' ? Text(
+                    widget.calledModel.comment,
+                    style: textPlanCard,
+                  ) : Text(
+                    'Sem observações do suporte',
+                    style: textPlanCard,
+                  ),
                 ),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  DateCardInfo(
+                    date: widget.calledModel.calledFinishedTime,
+                  ),
+                ],
               ),
             ],
           ),
