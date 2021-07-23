@@ -15,11 +15,10 @@ class EmailHelper {
   List<dynamic> emails = ['share_it_app@hotmail.com', 'rafaelpaz86@gmail.com'];
 
   Future<bool> sendMessageToCompanyPlanZero(String plan, String receiver, String employeesNumbers, String name) async {
-    final smtpServer = hotmail(appName, password);
+    final smtpServer = yahoo(appName, password);
     final message = Message()
         ..from = Address(appName, 'Share IT App')
         ..recipients.add(receiver)
-        ..ccRecipients.addAll(emails)
         ..subject = 'Inscrição no Share IT'
       ..html = "<h1 style='color:green'>ShareIT App</h1> <p>&#128525;</p>\n <p>Olá, $name.\n</p> <p>Vamos lá, você escolheu o $plan.\n Para começar, caso você não tenha cadastrado os $employeesNumbers funcionarios pelo App é preciso enviar algumas informações.\n</p>"
           "<p>Para cadastrar no $plan é necessario </p> <i> separar os funcionarios em 3 setores, Gerencia, Funcionário, Suporte</i>\n"

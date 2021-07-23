@@ -13,7 +13,7 @@ class LogoContainer extends StatelessWidget {
       child: Hero(
         tag: tag,
         child: Image.asset(
-          'assets/images/shareit.png',
+          'assets/images/logo.png',
           fit: BoxFit.fill,
           scale: 2.5,
         ),

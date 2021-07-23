@@ -109,13 +109,17 @@ class EmployeeBloc extends BlocBase {
       user = await getUserModel(id: userCredential.user.uid);
       await _saveUserData();
       await isLogged();
-      if(user.available == false) {
-        CustomToast.fail('Seu cadastro ainda está em analise.');
-      }
-      if(user.finishTour == false) {
+
+      if(user.finishTour == false && user.available == true) {
         Get.offAll(() => TourModule());
+        return userCredential;
+      } else if (user.available == false) {
+        Get.offAll(() => LoginModule());
+        CustomToast.fail('Seu cadastro ainda está em analise.');
+        return userCredential;
       } else {
         Get.offAll(() => MainModule());
+        return userCredential;
       }
       _streamController.add(false);
     } on FirebaseAuthException catch (e) {
@@ -296,6 +300,7 @@ class EmployeeBloc extends BlocBase {
     final QuerySnapshot snapshot = await _fireStore
         .collection('users')
         .where('company_id', isEqualTo: employeeBloc.user.companyId)
+        .where('role', isEqualTo: 2)
         .get();
     list = snapshot.docs.map((e) => EmployeeModel.fromDocument(e)).toList();
     return list;

@@ -40,7 +40,7 @@ class _RegisterEmployeeScreenState extends State<RegisterEmployeeScreen> {
     final bottom = MediaQuery.of(context).viewInsets.bottom;
     return Scaffold(
       appBar: AppBar(
-        title: Text('registre seus funcionarios', style: textPlanCard,),
+        title: Text('registre seus funcionários', style: textPlanCard,),
         leading: IconButton(
           onPressed: () {
             showDialog(

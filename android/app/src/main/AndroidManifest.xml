@@ -2,7 +2,7 @@
     package="com.example.share_it">
    <application
         android:label="Share IT"
-        android:icon="@mipmap/shareit">
+        android:icon="@mipmap/logo">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

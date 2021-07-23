@@ -21,7 +21,7 @@ class _TourScreenState extends State<TourScreen> {
     {
       'text':
       'Bem-vindo ao Share IT App',
-      'image': 'assets/images/shareit.png',
+      'image': 'assets/images/logo.png',
     },
     {
       'text':
@@ -32,11 +32,6 @@ class _TourScreenState extends State<TourScreen> {
       'text':
       'Crie chamados diretamente para sua área de Suporte. Controlando o tempo de criação e finalização de um chamado.',
       'image': 'assets/images/suporte.png',
-    },
-    {
-      'text':
-      'O Grafico mostra qual área seu time está com mais problemas.',
-      'image': 'assets/images/pie2.png',
     },
     {
       'text':
@@ -115,10 +110,10 @@ class _TourScreenState extends State<TourScreen> {
                     return Padding(
                       padding: const EdgeInsets.only(left: 20, right: 20),
                       child:  CustomButton(
-                        onPressed: currentPage == 4 ? () async {
+                        onPressed: currentPage == 3 ? () async {
                           await userBloc.update(userBloc);
                         } : null,
-                        widget: currentPage == 4 ? Text('continuar') : Text(''),
+                        widget: currentPage == 3 ? Text('continuar') : Text(''),
                       ),
                     );
                   } else {

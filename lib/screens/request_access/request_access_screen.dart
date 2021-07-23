@@ -81,7 +81,7 @@ class _RequestAccessScreenState extends State<RequestAccessScreen> {
                           items: planBloc.planList.map((e) {
                             return CustomPlanCard(
                               title: e.name,
-                              subTitle: e.value,
+                              subTitle: '${e.value} mês',
                               text: e.index != 2
                                   ? 'funcionarios: até ${e.employees}'
                                   : 'funcionarios: ${e.employees}',
