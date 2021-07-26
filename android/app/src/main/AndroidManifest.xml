@@ -1,10 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.share_it">
+    package="com.anduril_my_team_support">
    <application
-        android:label="Share IT"
+        android:label="My TeamSupport"
         android:icon="@mipmap/logo">
         <activity
-            android:name="com.share_it.MainActivity"
+            android:name="com.anduril_my_team_support.MainActivity"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"

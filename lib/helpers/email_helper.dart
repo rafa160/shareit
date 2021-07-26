@@ -17,10 +17,10 @@ class EmailHelper {
   Future<bool> sendMessageToCompanyPlanZero(String plan, String receiver, String employeesNumbers, String name) async {
     final smtpServer = yahoo(appName, password);
     final message = Message()
-        ..from = Address(appName, 'Share IT App')
+        ..from = Address(appName, 'My TeamSupport App')
         ..recipients.add(receiver)
-        ..subject = 'Inscrição no Share IT'
-      ..html = "<h1 style='color:green'>ShareIT App</h1> <p>&#128525;</p>\n <p>Olá, $name.\n</p> <p>Vamos lá, você escolheu o $plan.\n Para começar, caso você não tenha cadastrado os $employeesNumbers funcionarios pelo App é preciso enviar algumas informações.\n</p>"
+        ..subject = 'Inscrição no My TeamSupport'
+      ..html = "<h1 style='color:green'>My TeamSupport App</h1> <p>&#128525;</p>\n <p>Olá, $name.\n</p> <p>Vamos lá, você escolheu o $plan.\n Para começar, caso você não tenha cadastrado os $employeesNumbers funcionarios pelo App é preciso enviar algumas informações.\n</p>"
           "<p>Para cadastrar no $plan é necessario </p> <i> separar os funcionarios em 3 setores, Gerencia, Funcionário, Suporte</i>\n"
           "<ul><li>e-mail</li><li>nome completo</li><li>cargo</li></ul>\n"
           "<p>após realização do cadastro de todos os funcionarios enviaremos um e-mail com login e senha.</p>\n"
@@ -46,10 +46,10 @@ class EmailHelper {
     final smtpServer = hotmail(appName, password);
     var time = formatDate(date);
     final message = Message()
-      ..from = Address(appName, 'Share IT')
+      ..from = Address(appName, 'My TeamSupport')
       ..recipients.addAll(emails)
       ..subject = 'Um chamado foi criado por ${employeeModel.name}'
-      ..html = "<h1 style='color:green'>ShareIT App</h1>\n"
+      ..html = "<h1 style='color:green'>My TeamSupport App</h1>\n"
           "<p>O Funcionário ${employeeModel.email} criou uma solicitação.</p>\n"
           "<p>Assunto: ${calledModel.subject}</p>\n\n"
           "Criado em:  <i>$time</i>";

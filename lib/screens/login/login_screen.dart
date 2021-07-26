@@ -105,7 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   builder: (context, snapshot) {
                     if(snapshot.data != true) {
                       return Padding(
-                        padding: EdgeInsets.only(bottom: bottom),
+                        padding: EdgeInsets.only(bottom: 10),
                         child: CustomButton(
                           widget: Text(Strings.LOGIN, style: buttonColors,),
                           onPressed: () async {

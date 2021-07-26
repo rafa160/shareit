@@ -9,7 +9,7 @@ class AppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppTheme(
-        defaultBrightness: Brightness.dark,
+        defaultBrightness: Brightness.light,
         themeDataWithBrightnessBuilder: (brightness) =>
         brightness == Brightness.light
             ? ThemeLight.themeLight

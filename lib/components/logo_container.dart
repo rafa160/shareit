@@ -15,7 +15,7 @@ class LogoContainer extends StatelessWidget {
         child: Image.asset(
           'assets/images/logo.png',
           fit: BoxFit.fill,
-          scale: 2.5,
+          scale: 3.5,
         ),
       ),
     );

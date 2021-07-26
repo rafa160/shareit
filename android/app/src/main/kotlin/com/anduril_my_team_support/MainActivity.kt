@@ -1,4 +1,4 @@
-package com.share_it
+package com.anduril_my_team_support
 
 import io.flutter.embedding.android.FlutterActivity
 
