@@ -39,7 +39,7 @@ class ProfileHeader extends StatelessWidget {
             children: <Widget>[
               FaIcon(FontAwesomeIcons.rulerHorizontal),
               SizedBox(width: 10,),
-              Text(email, style: subtitleProfileHeader),
+              Flexible(flex: 6,child: Text(email, style: subtitleProfileHeader)),
               SizedBox(width: 10,),
               Expanded(child: Text(role, style: subtitleProfileHeader)),
             ],
