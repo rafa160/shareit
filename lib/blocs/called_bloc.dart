@@ -18,6 +18,15 @@ class CalledBloc extends BlocBase {
   List<dynamic> supportList = [];
   List<CalledModel> calledByCatId = [];
 
+  String _search = '';
+  // ignore: unnecessary_getters_setters
+  String get search => _search;
+
+  // ignore: unnecessary_getters_setters
+  set search(String value) {
+    _search = value;
+  }
+
   EmailHelper _emailHelper = new EmailHelper();
 
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
@@ -74,6 +83,7 @@ class CalledBloc extends BlocBase {
   }
 
   Future<List<CalledModel>> getCalledModelList({EmployeeBloc employeeBloc}) async {
+    myCalledItems.clear();
     if (employeeBloc.user.status.index != 1) {
       final QuerySnapshot snapshot = await _fireStore.collection('called_requests')
           .where('company_id', isEqualTo: employeeBloc.user.companyId).get();
@@ -98,10 +108,22 @@ class CalledBloc extends BlocBase {
     return calledByCatId;
   }
 
+  List<CalledModel> get filteredList {
+    final List<CalledModel> filtered = [];
+
+    if(search.isEmpty) {
+      filtered.addAll(myCalledItems);
+    } else {
+      filtered.addAll(myCalledItems.where((element) => element.subject.toLowerCase().contains(search.toLowerCase())));
+    }
+    myCalledItems.clear();
+    myCalledItems.addAll(filtered);
+    return filtered;
+  }
+
   @override
   void dispose() {
     super.dispose();
     _streamLoadingController.close();
-    // streamSubscription.cancel();
   }
 }

@@ -8,6 +8,8 @@ import 'package:share_it/blocs/employee_bloc.dart';
 import 'package:share_it/components/custom_called_card.dart';
 import 'package:share_it/components/custom_called_card_image.dart';
 import 'package:share_it/components/custom_circular_progress_indicator.dart';
+import 'package:share_it/components/custom_search_bar.dart';
+import 'package:share_it/components/custom_search_dialog.dart';
 import 'package:share_it/components/style.dart';
 import 'package:share_it/helpers/strings.dart';
 import 'package:share_it/models/called_model.dart';
@@ -26,25 +28,19 @@ class MyCalledScreen extends StatefulWidget {
 
 class _MyCalledScreenState extends State<MyCalledScreen> {
 
-  List<CalledModel> myList = [];
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   var calledBloc = MyCalledModule.to.getBloc<CalledBloc>();
   var homeBloc = AppModule.to.getBloc<HomeBloc>();
- String image;
-
-  Future getImage() async {
-    image = await homeBloc.getImage();
-  }
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    getImage();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       body: SingleChildScrollView(
         child: Center(
           child: Padding(
@@ -59,6 +55,20 @@ class _MyCalledScreenState extends State<MyCalledScreen> {
                   padding: const EdgeInsets.only(left: 20, right: 20),
                   child: Text(Strings.APPBAR_TITLE_MY_CALLED, style: homeMessage,),
                 ),
+                CustomSearchBar(
+                  text: calledBloc.search.isEmpty ? 'pesquisar...' : calledBloc.search,
+                  onTap: () async {
+                    final search = await showDialog(
+                        context: context,
+                      builder: (_) => SearchDialog(calledBloc.search),
+                    );
+                    if (search != null) {
+                      setState(() {
+                        calledBloc.search = search;
+                      });
+                    }
+                  },
+                ),
                 FutureBuilder(
                   future: calledBloc.getCalledModelList(employeeBloc: widget.employeeBloc),
                     builder: (context, snapshot) {
@@ -72,7 +82,7 @@ class _MyCalledScreenState extends State<MyCalledScreen> {
                       }
                       return ListView.builder(
                           shrinkWrap: true,
-                          itemCount: snapshot.data.length,
+                          itemCount: calledBloc.filteredList.length,
                           physics: NeverScrollableScrollPhysics(),
                           itemBuilder: (context, index) {
                             CalledModel item = snapshot.data[index];
