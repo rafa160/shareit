@@ -8,6 +8,8 @@ import 'package:share_it/blocs/called_bloc.dart';
 import 'package:share_it/blocs/employee_bloc.dart';
 import 'package:share_it/components/custom_called_card.dart';
 import 'package:share_it/components/custom_circular_progress_indicator.dart';
+import 'package:share_it/components/custom_search_bar.dart';
+import 'package:share_it/components/custom_search_dialog.dart';
 import 'package:share_it/components/style.dart';
 import 'package:share_it/models/called_model.dart';
 import 'package:share_it/screens/called_by_category/called_details_info_module.dart';
@@ -48,18 +50,7 @@ class _CalledByCategoryScreenState extends State<CalledByCategoryScreen> {
         ),
       ),
       body: SingleChildScrollView(
-        child: Padding(
-            padding: const EdgeInsets.only(left: 20, right: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  'Chamados cadastrados...',
-                  style: dayTitle,
-                ),
+        child:
                 FutureBuilder(
                   future: calledBloc.getCalledListByCategoryId(employeeModel: employeeBloc.user, id: widget.categoryId),
                   builder: (context, snapshot) {
@@ -71,33 +62,68 @@ class _CalledByCategoryScreenState extends State<CalledByCategoryScreen> {
                         );
                       default:
                     }
-                    return ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: snapshot.data.length,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemBuilder: (context, index) {
-                          CalledModel item = snapshot.data[index];
-                          var dateCreatedString = DateFormat('dd/MM hh:mm').format(item.calledCreatedTime);
-                          var dateFinishedString =  item.calledFinishedTime != null ? DateFormat('dd/MM hh:mm').format(item.calledFinishedTime) : '';
-                          return GestureDetector(
-                            onTap: () async {
-                              await Get.to(() => MyCalledDetailsOnlyReadModule(item));
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CustomSearchBar(
+                          text: calledBloc.search.isEmpty ? 'pesquisar...' : calledBloc.search,
+                          onTap: () async {
+                            final search = await showDialog(
+                              context: context,
+                              builder: (_) => SearchDialog(calledBloc.search),
+                            );
+                            if (search != null) {
+                              setState(() {
+                                calledBloc.search = search;
+                              });
+                            }
+                          },
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text('${snapshot.data.length} ', style: dayTitle,),
+                              Text(
+                                'Chamados cadastrados.',
+                                style: dayTitle,
+                              ),
+                            ],
+                          ),
+                        ),
+                        ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: calledBloc.filteredByCategory.length,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              CalledModel item = snapshot.data[index];
+                              var dateCreatedString = DateFormat('dd/MM hh:mm').format(item.calledCreatedTime);
+                              var dateFinishedString =  item.calledFinishedTime != null ? DateFormat('dd/MM hh:mm').format(item.calledFinishedTime) : '';
+                              return GestureDetector(
+                                onTap: () async {
+                                  await Get.to(() => MyCalledDetailsOnlyReadModule(item));
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.only( left: 20, right: 20),
+                                  child: CustomCalledCard(
+                                    email: item.employeeEmail,
+                                    subject: item.subject,
+                                    createdDate: dateCreatedString,
+                                    finishedDate: dateFinishedString,
+                                  ),
+                                ),
+                              );
                             },
-                            child: CustomCalledCard(
-                              email: item.employeeEmail,
-                              subject: item.subject,
-                              createdDate: dateCreatedString,
-                              finishedDate: dateFinishedString,
-                            ),
-                          );
-                        },
-                      );
+                          ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                      ],
+                    );
                     }
                 ),
-              ],
-            ),
           ),
-        ),
     );
   }
 }

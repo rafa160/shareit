@@ -121,6 +121,18 @@ class CalledBloc extends BlocBase {
     return filtered;
   }
 
+  List<CalledModel> get filteredByCategory {
+    final List<CalledModel> filtered = [];
+    if(search.isEmpty) {
+      filtered.addAll(calledByCatId);
+    } else {
+      filtered.addAll(calledByCatId.where((element) => element.subject.toLowerCase().contains(search.toLowerCase())));
+    }
+    calledByCatId.clear();
+    calledByCatId.addAll(filtered);
+    return filtered;
+  }
+
   @override
   void dispose() {
     super.dispose();
